@@ -12,10 +12,14 @@ import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import HomeIcon from '@mui/icons-material/Home';
-import InfoIcon from '@mui/icons-material/Info';
-import CreateIcon from '@mui/icons-material/Create';
+import SearchIcon from '@mui/icons-material/Search';
+import KeyboardVoiceIcon from '@mui/icons-material/KeyboardVoice';
 import MenuIcon from '@mui/icons-material/Menu';
 import { IconButton } from '@mui/material';
+import StorefrontIcon from '@mui/icons-material/Storefront';
+import LibraryAddCheckIcon from '@mui/icons-material/LibraryAddCheck';
+import GradeIcon from '@mui/icons-material/Grade';
+import Button from '@mui/material/Button';
 
 
 export default function NavBar(props) {
@@ -36,25 +40,49 @@ export default function NavBar(props) {
                 <ListItem disablePadding>
                     <ListItemButton component={Link} to="/" selected={"/" === path}>
                         <ListItemIcon>
-                            <HomeIcon/>
+                            <HomeIcon sx={{color: 'black'}}/>
                         </ListItemIcon>
-                        <ListItemText primary={"Home"} />
+                        <ListItemText primary={"Home"}/>
                     </ListItemButton>
                 </ListItem>
                 <ListItem disablePadding>
-                    <ListItemButton component={Link} to="/about" selected={"/about" === path}>
+                    <ListItemButton component={Link} to="/browse" selected={"/browse" === path}>
                         <ListItemIcon>
-                            <InfoIcon/>
+                            <SearchIcon sx={{color: 'black'}}/>
                         </ListItemIcon>
-                        <ListItemText primary={"About"} />
+                        <ListItemText primary={"Browse"} />
+                    </ListItemButton>
+                </ListItem>
+                <ListItem disablePadding>
+                    <ListItemButton component={Link} to="/following" selected={"/following" === path}>
+                        <ListItemIcon>
+                            <LibraryAddCheckIcon sx={{color: 'black'}}/>
+                        </ListItemIcon>
+                        <ListItemText primary={"Following"} />
+                    </ListItemButton>
+                </ListItem>
+                <ListItem disablePadding>
+                    <ListItemButton component={Link} to="/favorites" selected={"/favorites" === path}>
+                        <ListItemIcon>
+                            <GradeIcon sx={{color: 'black'}}/>
+                        </ListItemIcon>
+                        <ListItemText primary={"Favorites"} />
                     </ListItemButton>
                 </ListItem>
                 <ListItem disablePadding>
                     <ListItemButton component={Link} to="/create" selected={"/create" === path}>
                         <ListItemIcon>
-                            <CreateIcon/>
+                            <KeyboardVoiceIcon sx={{color: 'black'}}/>
                         </ListItemIcon>
                         <ListItemText primary={"Create"} />
+                    </ListItemButton>
+                </ListItem>
+                <ListItem disablePadding>
+                    <ListItemButton component={Link} to="/shop" selected={"/shop" === path}>
+                        <ListItemIcon>
+                            <StorefrontIcon  sx={{color: 'black'}}/>
+                        </ListItemIcon>
+                        <ListItemText primary={"Shop"} />
                     </ListItemButton>
                 </ListItem>
             </List>
@@ -65,16 +93,19 @@ export default function NavBar(props) {
   return (
     <Box sx={{ display: 'flex' }}>
       <CssBaseline />
-      <AppBar position="fixed" sx={{ zIndex: (theme) => theme.zIndex.drawer + 1 }}>
+      <AppBar position="fixed" sx={{ zIndex: (theme) => theme.zIndex.drawer + 1, backgroundColor: 'white', color: 'black'}}>
         <Toolbar>
 
             <IconButton color="inherit" onClick={changeOpenStatus} sx={{mr:2, display:{sm:"none"}}}>
                 <MenuIcon/>
             </IconButton>
 
-            <Typography variant="h6" noWrap component="div">
-                Our application
+            <Typography variant="h6" noWrap component="div" sx={{ color: 'black', fontWeight:'bold'}}>
+                Podular
             </Typography>
+
+            <Button variant="contained" color="inherit" sx={{ ml: 'auto', backgroundColor: 'lightpink', textTransform: 'none' }}>Account</Button>
+
         </Toolbar>
       </AppBar>
       <Drawer

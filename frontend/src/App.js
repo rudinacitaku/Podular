@@ -2,9 +2,12 @@
 import './App.css';
 import {Routes, Route} from 'react-router-dom';
 import Home from './components/Home';
-import About from './components/About';
+import Browse from './components/Browse';
 import Create from './components/Create';
 import Navbar from './components/NavBar';
+import Shop from './components/Shop';
+import Following from './components/Following';
+import Favorites from './components/Favorites';
 
 function App() {
   const navWidth = 220
@@ -15,9 +18,13 @@ function App() {
         content = {
           <Routes>
             <Route path="" element={<Home/>}/>
-            <Route path="/about" element={<About/>}/>
+            <Route path="/browse" element={<Browse/>}/>
             <Route path="/create" element={<Create/>}/>
+            <Route path="/shop" element={<Shop/>}/>
+            <Route path="/following" element={<Following/>}/>
+            <Route path="/favorites" element={<Favorites/>}/>
           </Routes>
+        
         }
       />
     </div>
