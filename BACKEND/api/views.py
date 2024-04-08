@@ -1,6 +1,14 @@
-from django.shortcuts import render
-from django.http import HttpResponse
+from . import serializers
+from rest_framework import generics, permissions 
+from . import models
 
-# Create your views here.
-def home(request):
-    return HttpResponse("This is the homepage!!")
+
+class CreatorList(generics.ListCreateAPIView):
+    queryset=models.Creator.objects.all()
+    serializer_class=serializers.CreatorSerializer
+   # permission_classes=[permissions.IsAuthenticated]
+
+class CreatorDetails(generics.RetrieveUpdateDestroyAPIView):
+    queryset=models.Creator.objects.all()
+    serializer_class=serializers.CreatorDetailSerializer
+   # permission_classes=[permissions.IsAuthenticated]

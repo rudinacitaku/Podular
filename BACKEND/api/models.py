@@ -7,6 +7,8 @@ class Creator (models.Model):
     user=models.ForeignKey(User,on_delete=models.CASCADE)
     address=models.TextField(null=True)
 
+    def __str__ (self):
+            return self.user.username
 #Category
     class PodcastCategory (models.Model):
         title=models.CharField(max_length=200)
