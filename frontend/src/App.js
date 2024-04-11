@@ -8,6 +8,8 @@ import Navbar from './components/NavBar';
 import Shop from './components/Shop';
 import Following from './components/Following';
 import Favorites from './components/Favorites';
+import Photo1 from './components/photos/photo1.jpg';
+
 
 function App() {
   const navWidth = 220
@@ -27,8 +29,14 @@ function App() {
         
         }
       />
+      <div className="banner">
+        <img src={Photo1} alt="Example" />
+        <h1 className="photo-text">Top Picks for you!</h1>
+          <h3 className="photo-subtext">Head on to your personalized picks to find more of what you like</h3>
+      </div>
     </div>
   );
 }
 
 export default App;
+
