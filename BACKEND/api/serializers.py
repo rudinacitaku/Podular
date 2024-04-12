@@ -18,3 +18,21 @@ class CreatorDetailSerializer(serializers.ModelSerializer):
     def __init__ (self, *args, **kwargs):
         super(CreatorDetailSerializer, self).__init__(*args, **kwargs)
         self.Meta.depth = 1
+        
+class PodcastListSerializer(serializers.ModelSerializer):
+    class Meta:
+        model=models.Podcast
+        fields=['id','title', 'detail']
+
+    def __init__ (self, *args, **kwargs):
+        super(PodcastListSerializer, self).__init__(*args, **kwargs)
+        self.Meta.depth = 1
+
+class PodcastDetailSerializer(serializers.ModelSerializer):
+    class Meta:
+        model=models.Podcast
+        fields=['id','title', 'detail']
+
+    def __init__ (self, *args, **kwargs):
+        super(PodcastListSerializer, self).__init__(*args, **kwargs)
+        self.Meta.depth = 1

@@ -10,7 +10,7 @@ class Creator (models.Model):
     def __str__ (self):
             return self.user.username
 #Category
-    class PodcastCategory (models.Model):
+class PodcastCategory (models.Model):
         title=models.CharField(max_length=200)
         detail=models.TextField(null=True)
 
@@ -18,7 +18,7 @@ class Creator (models.Model):
             return self.title
         
 #Podcast 
-    class Podcast (models.Model):
+class Podcast (models.Model):
         title=models.CharField(max_length=200)
         detail=models.TextField(null=True)
 
