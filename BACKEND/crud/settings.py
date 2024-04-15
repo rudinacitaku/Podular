@@ -38,9 +38,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
-    'corsheaders',
     'api',
 ]
+# e heka 'corsheaders', te rreshti 41 
 
 MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
@@ -140,5 +140,5 @@ REST_FRAMEWORK = {
     #],
     #'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
     'DEFAULT_PAGINATION_CLASS': 'api.pagination.CustomPagination',
-    'PAGE_SIZE': 1, 
+    'PAGE_SIZE': 10, 
 }

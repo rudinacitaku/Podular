@@ -1,5 +1,5 @@
 from . import serializers
-from rest_framework import generics, permissions 
+from rest_framework import generics, permissions, viewsets
 from . import models
 
 
@@ -27,4 +27,7 @@ class CustomerDetails(generics.RetrieveUpdateDestroyAPIView):
     queryset=models.Customer.objects.all()
     serializer_class=serializers.CustomerDetailSerializer
 
+class CustomerAddressViewSet(viewsets.ModelViewSet):
+    serializer_class=serializers.CustomerAddressSerializer
+    queryset=models.CustomerAddress.objects.all()
     
