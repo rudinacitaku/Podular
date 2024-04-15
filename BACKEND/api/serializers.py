@@ -4,7 +4,7 @@ from . import models
 class CreatorSerializer(serializers.ModelSerializer):
     class Meta:
         model=models.Creator
-        fields=['user', 'address']
+        fields=['user', 'address']  #edhe 'id' ne vid?
 
     def __init__ (self, *args, **kwargs):
         super(CreatorSerializer, self).__init__(*args, **kwargs)
@@ -35,4 +35,34 @@ class PodcastDetailSerializer(serializers.ModelSerializer):
 
     def __init__ (self, *args, **kwargs):
         super(PodcastListSerializer, self).__init__(*args, **kwargs)
+        self.Meta.depth = 1
+#Customer
+class CustomerSerializer(serializers.ModelSerializer):
+    class Meta:
+        model=models.Customer
+        fields=['id','user', 'mobile']
+
+    def __init__ (self, *args, **kwargs):
+        super(CustomerSerializer, self).__init__(*args, **kwargs)
+        self.Meta.depth = 1
+
+class CustomerDetailSerializer(serializers.ModelSerializer):
+    class Meta:
+        model=models.Customer
+        fields=['id','user', 'mobile']
+
+    def __init__ (self, *args, **kwargs):
+        super(CustomerDetailSerializer, self).__init__(*args, **kwargs)
+        self.Meta.depth = 1
+ 
+#Order
+
+#Customer Address
+class CustomerAddressSerializer(serializers.ModelSerializer):
+    class Meta:
+        model=models.CustomerAddress
+        fields=['id', 'customer', 'address', 'default_addres']
+    
+    def __init__(self, *args, **kwargs):
+        super(CustomerAddressSerializer).__init__(*args, **kwargs)
         self.Meta.depth = 1

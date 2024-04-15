@@ -24,3 +24,20 @@ class Podcast (models.Model):
 
         def __str__ (self):
             return self.title
+        
+#Customer
+class Customer(models.Model):
+        user=models.ForeignKey(User,on_delete=models.CASCADE)
+        mobile=models.PositiveBigIntegerField()
+
+        def __str__ (self):
+            return self.user.username
+        
+#Customer Address
+class CustomerAddress(models.Model):
+    customer=models.ForeignKey(Customer,on_delete=models.CASCADE,related_name='customer_addresses')
+    address=models.TextField()
+    default_address=models.BooleanField(default=False)
+
+    def __str__(self):
+          return self.address
