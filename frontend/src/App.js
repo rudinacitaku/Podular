@@ -16,6 +16,8 @@ import SellerLogin from './components/Seller/SellerLogin';
 import SellerDashboard from './components/Seller/SellerDashboard';
 import SellerProducts from './components/Seller/SellerProducts';
 import AddProduct from './components/Seller/AddProduct';
+import SellerOrders from './components/Seller/SellerOrders';
+import Customers from './components/Seller/Customers';
 
 function App() {
   const navWidth = 220
@@ -38,6 +40,9 @@ function App() {
             <Route path="/seller/dashboard" element={<SellerDashboard/>} />
             <Route path="/seller/products" element={<SellerProducts/>} />
             <Route path='/seller/add-product' element={<AddProduct/>}/>
+            <Route path='/seller/orders' element={<SellerOrders/>}/>
+            <Route path='/seller/customers' element={<Customers/>}/>
+
           </Routes>
         
         }

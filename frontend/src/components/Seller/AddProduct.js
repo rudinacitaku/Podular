@@ -1,4 +1,3 @@
-
 import SellerSidebar from './SellerSidebar';
 
 function AddProduct() {
@@ -42,7 +41,7 @@ function AddProduct() {
                 </div>
               </div>
             </div>
-            <div className='col-md-3 col-12 mb-2'> {/* Column for the sidebar */}
+            <div className='col-md-3 col-12 mb-2 order-first order-md-last'> {/* Column for the sidebar, displayed on the right */}
               <SellerSidebar />
             </div>
           </div>
@@ -53,3 +52,4 @@ function AddProduct() {
 }
 
 export default AddProduct;
+
