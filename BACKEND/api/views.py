@@ -19,4 +19,12 @@ class PodcastDetails(generics.RetrieveUpdateDestroyAPIView):
     queryset=models.Podcast.objects.all()
     serializer_class=serializers.PodcastDetailSerializer
 
+class CustomerList(generics.ListCreateAPIView):
+    queryset=models.Customer.objects.all()
+    serializer_class=serializers.CustomerSerializer
+
+class CustomerDetails(generics.RetrieveUpdateDestroyAPIView):
+    queryset=models.Customer.objects.all()
+    serializer_class=serializers.CustomerDetailSerializer
+
     

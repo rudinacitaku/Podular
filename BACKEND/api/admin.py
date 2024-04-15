@@ -5,4 +5,5 @@ from . import models
 admin.site.register(models.Creator)
 admin.site.register(models.PodcastCategory)
 admin.site.register(models.Podcast)
+admin.site.register(models.Customer)
 
