@@ -1,9 +1,278 @@
-import React from 'react'
+import React from 'react';
+import '@fortawesome/fontawesome-free/css/all.min.css';
+import logo from './logo.svg';
+
 
 function Browse() {
   return (
-    <div>Browse</div>
-  )
+    <>
+      {/* Latest Podcasts */}
+      <main className='mt-4'>
+        <div className='container'>
+          <h3 className='mb-4'>Latest Podcasts <a href='#' className='float-end btn btn-dark'>View All Podcasts <i className="fas fa-arrow-right"></i></a></h3>
+        </div>
+      </main>
+      
+      {/* Start of row for Latest Podcasts */}
+      <div className='row row-cols-1 row-cols-md-4 g-4'>
+        {/* Card 1 */}
+        <div className='col'>
+          <div className="card h-100">
+            <img src={logo} className="card-img-top" alt="Card Image" />
+            <div className="card-body">
+              <h4 className="card-title">Podcast Title</h4>
+              <h5 className="card-title text-muted">Price: 100$</h5>
+            </div>
+            <div className='card-footer'>
+              <button title="Add to Cart" className='btn btn-success btn-sm'><i className="fas fa-cart-plus"></i></button>
+              <button title="Add to Wishlist" className='btn btn-danger btn-sm ms-1'><i className="fas fa-heart"></i></button>
+            </div>
+          </div>
+        </div>
+        {/* Add Card 2, Card 3, Card 4 */}
+        {/* Card 2 */}
+        <div className='col'>
+          <div className="card h-100">
+            <img src={logo} className="card-img-top" alt="Card Image" />
+            <div className="card-body">
+              <h4 className="card-title">Podcast Title</h4>
+              <h5 className="card-title text-muted">Price: 100$</h5>
+            </div>
+            <div className='card-footer'>
+              <button title="Add to Cart" className='btn btn-success btn-sm'><i className="fas fa-cart-plus"></i></button>
+              <button title="Add to Wishlist" className='btn btn-danger btn-sm ms-1'><i className="fas fa-heart"></i></button>
+            </div>
+          </div>
+        </div>
+        {/* Card 3 */}
+        <div className='col'>
+        <div className="card h-100">
+            <img src={logo} className="card-img-top" alt="Card Image" />
+            <div className="card-body">
+              <h4 className="card-title">Podcast Title</h4>
+              <h5 className="card-title text-muted">Price: 100$</h5>
+            </div>
+            <div className='card-footer'>
+              <button title="Add to Cart" className='btn btn-success btn-sm'><i className="fas fa-cart-plus"></i></button>
+              <button title="Add to Wishlist" className='btn btn-danger btn-sm ms-1'><i className="fas fa-heart"></i></button>
+            </div>
+          </div>
+        </div>
+        {/* Card 4 */}
+        <div className='col'>
+        <div className="card h-100">
+            <img src={logo} className="card-img-top" alt="Card Image" />
+            <div className="card-body">
+              <h4 className="card-title">Podcast Title</h4>
+              <h5 className="card-title text-muted">Price: 100$</h5>
+            </div>
+            <div className='card-footer'>
+              <button title="Add to Cart" className='btn btn-success btn-sm'><i className="fas fa-cart-plus"></i></button>
+              <button title="Add to Wishlist" className='btn btn-danger btn-sm ms-1'><i className="fas fa-heart"></i></button>
+            </div>
+          </div>
+        </div>
+      </div>
+      {/* End of row for Latest Podcasts */}
+
+      {/* Popular Categories */}
+      <main className='mt-4'>
+        <div className='container'>
+          <h3 className='mb-4'>Popular Categories <a href='#' className='float-end btn btn-dark'>View All Categories <i className="fas fa-arrow-right"></i></a></h3>
+        </div>
+      </main>
+      
+      {/* Start of row for Popular Categories */}
+      <div className='row row-cols-1 row-cols-md-4 g-4'>
+        {/* Card 1 */}
+        <div className='col'>
+        <div className="card h-100">
+            <img src={logo} className="card-img-top" alt="Card Image" />
+            <div className="card-body">
+              <h4 className="card-title">Podcast Category</h4>
+            </div>
+            <div className='card-footer'>
+              Downloads : 100
+            </div>
+          </div>
+        </div>
+        {/* Card 2 */}
+        <div className='col'>
+        <div className="card h-100">
+            <img src={logo} className="card-img-top" alt="Card Image" />
+            <div className="card-body">
+              <h4 className="card-title">Podcast Category</h4>
+            </div>
+            <div className='card-footer'>
+              Downloads : 100
+            </div>
+          </div>
+        </div>
+        {/* Card 3 */}
+        <div className='col'>
+        <div className="card h-100">
+            <img src={logo} className="card-img-top" alt="Card Image" />
+            <div className="card-body">
+              <h4 className="card-title">Podcast Category</h4>
+            </div>
+            <div className='card-footer'>
+              Downloads : 100
+            </div>
+          </div>
+        </div>
+        {/* Card 4 */}
+        <div className='col'>
+        <div className="card h-100">
+            <img src={logo} className="card-img-top" alt="Card Image" />
+            <div className="card-body">
+              <h4 className="card-title">Podcast Category</h4>
+            </div>
+            <div className='card-footer'>
+              Downloads : 100
+            </div>
+          </div>
+        </div>
+      </div>
+      {/* End of row for Popular Categories */}
+
+      {/* Popular Podcasts */}
+      <main className='mt-4'>
+        <div className='container'>
+          <h3 className='mb-4'>Popular Podcasts <a href='#' className='float-end btn btn-dark'>View All Podcasts <i className="fas fa-arrow-right"></i></a></h3>
+        </div>
+      </main>
+      
+      {/* Start of row for Popular Podcasts */}
+      <div className='row row-cols-1 row-cols-md-4 g-4'>
+        {/* Card 1 */}
+        <div className='col'>
+        <div className='col'>
+          <div className="card h-100">
+            <img src={logo} className="card-img-top" alt="Card Image" />
+            <div className="card-body">
+              <h4 className="card-title">Podcast Title</h4>
+              <h5 className="card-title text-muted">Price: 100$</h5>
+            </div>
+            <div className='card-footer'>
+              <button title="Add to Cart" className='btn btn-success btn-sm'><i className="fas fa-cart-plus"></i></button>
+              <button title="Add to Wishlist" className='btn btn-danger btn-sm ms-1'><i className="fas fa-heart"></i></button>
+            </div>
+          </div>
+        </div>
+        </div>
+        {/* Card 2 */}
+        <div className='col'>
+        <div className='col'>
+          <div className="card h-100">
+            <img src={logo} className="card-img-top" alt="Card Image" />
+            <div className="card-body">
+              <h4 className="card-title">Podcast Title</h4>
+              <h5 className="card-title text-muted">Price: 100$</h5>
+            </div>
+            <div className='card-footer'>
+              <button title="Add to Cart" className='btn btn-success btn-sm'><i className="fas fa-cart-plus"></i></button>
+              <button title="Add to Wishlist" className='btn btn-danger btn-sm ms-1'><i className="fas fa-heart"></i></button>
+            </div>
+          </div>
+        </div>
+        </div>
+        {/* Card 3 */}
+        <div className='col'>
+        <div className='col'>
+          <div className="card h-100">
+            <img src={logo} className="card-img-top" alt="Card Image" />
+            <div className="card-body">
+              <h4 className="card-title">Podcast Title</h4>
+              <h5 className="card-title text-muted">Price: 100$</h5>
+            </div>
+            <div className='card-footer'>
+              <button title="Add to Cart" className='btn btn-success btn-sm'><i className="fas fa-cart-plus"></i></button>
+              <button title="Add to Wishlist" className='btn btn-danger btn-sm ms-1'><i className="fas fa-heart"></i></button>
+            </div>
+          </div>
+        </div>
+        </div>
+        {/* Card 4 */}
+        <div className='col'>
+        <div className='col'>
+          <div className="card h-100">
+            <img src={logo} className="card-img-top" alt="Card Image" />
+            <div className="card-body">
+              <h4 className="card-title">Podcast Title</h4>
+              <h5 className="card-title text-muted">Price: 100$</h5>
+            </div>
+            <div className='card-footer'>
+              <button title="Add to Cart" className='btn btn-success btn-sm'><i className="fas fa-cart-plus"></i></button>
+              <button title="Add to Wishlist" className='btn btn-danger btn-sm ms-1'><i className="fas fa-heart"></i></button>
+            </div>
+          </div>
+        </div>
+        </div>
+      </div>
+      {/* End of row for Popular Podcasts */}
+
+      {/* Popular Sellers */}
+      <main className='mt-4'>
+        <div className='container'>
+          <h3 className='mb-4'>Popular Sellers <a href='#' className='float-end btn btn-dark'>View All Sellers <i className="fas fa-arrow-right"></i></a></h3>
+        </div>
+      </main>
+      
+      {/* Start of row for Popular Sellers */}
+      <div className='row row-cols-1 row-cols-md-4 g-4'>
+        {/* Card 1 */}
+
+        <div className='col'>
+        <div className="card h-100">
+            <img src={logo} className="card-img-top" alt="Card Image" />
+            <div className="card-body">
+              <h4 className="card-title">Seller Name</h4>
+            </div>
+            <div className='card-footer'>
+              Categories : <a href="#">Python</a>, <a href="#">React</a>
+            </div>
+          </div>
+        </div>
+        {/* Card 2 */}
+        <div className='col'>
+        <div className="card h-100">
+            <img src={logo} className="card-img-top" alt="Card Image" />
+            <div className="card-body">
+              <h4 className="card-title">Seller Name</h4>
+            </div>
+            <div className='card-footer'>
+              Categories : <a href="#">PHP</a>, <a href="#">React</a>
+            </div>
+          </div>
+        </div>
+        {/* Card 3 */}
+        <div className='col'>
+        <div className="card h-100">
+            <img src={logo} className="card-img-top" alt="Card Image" />
+            <div className="card-body">
+              <h4 className="card-title">Seller Name</h4>
+            </div>
+            <div className='card-footer'>
+              Categories : <a href="#">UI</a>, <a href="#">UX</a>
+            </div>
+          </div>
+        </div>
+        {/* Card 4 */}
+        <div className='col'>
+        <div className="card h-100">
+            <img src={logo} className="card-img-top" alt="Card Image" />
+            <div className="card-body">
+              <h4 className="card-title">Seller Name</h4>
+            </div>
+            <div className='card-footer'>
+              Categories : <a href="#">WordPress</a>, <a href="#">Graphic Design</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      {/* End of row for Popular Sellers */}
+    </>
+  );
 }
 
-export default Browse
+export default Browse;
