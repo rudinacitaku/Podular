@@ -8,8 +8,12 @@ import Navbar from './components/NavBar';
 import Shop from './components/Shop';
 import Following from './components/Following';
 import Favorites from './components/Favorites';
-import Photo1 from './components/photos/photo1.jpg';
+import 'bootstrap/dist/css/bootstrap.css';
 
+//Seller panel
+import SellerRegister from './components/Seller/SellerRegister';
+import SellerLogin from './components/Seller/SellerLogin';
+import SellerDashboard from './components/Seller/SellerDashboard';
 
 function App() {
   const navWidth = 220
@@ -25,15 +29,15 @@ function App() {
             <Route path="/shop" element={<Shop/>}/>
             <Route path="/following" element={<Following/>}/>
             <Route path="/favorites" element={<Favorites/>}/>
+
+            {/*Seller Routes*/}
+            <Route path="/seller/register" element={<SellerRegister/>} />
+            <Route path="/seller/login" element={<SellerLogin/>} />
+            <Route path="/seller/dashboard" element={<SellerDashboard/>} />
           </Routes>
         
         }
       />
-      <div className="banner">
-        <img src={Photo1} alt="Example" />
-        <h1 className="photo-text">Top Picks for you!</h1>
-          <h3 className="photo-subtext">Head on to your personalized picks to find more of what you like</h3>
-      </div>
     </div>
   );
 }

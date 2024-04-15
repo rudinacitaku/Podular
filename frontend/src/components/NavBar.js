@@ -20,6 +20,8 @@ import StorefrontIcon from '@mui/icons-material/Storefront';
 import LibraryAddCheckIcon from '@mui/icons-material/LibraryAddCheck';
 import GradeIcon from '@mui/icons-material/Grade';
 import Button from '@mui/material/Button';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 
 
 export default function NavBar(props) {
@@ -104,7 +106,29 @@ export default function NavBar(props) {
                 Podular
             </Typography>
 
-            <Button variant="contained" color="inherit" sx={{ ml: 'auto', backgroundColor: 'lightpink', textTransform: 'none' }}>Account</Button>
+            {/*<Button variant="contained" color="inherit" sx={{ ml: 'auto', backgroundColor: 'lightpink', textTransform: 'none' }}>Account</Button>*/}
+            <div className="navbar-nav ms-auto">
+    <ul className="navbar-nav">
+        <li className="nav-item dropdown">
+            <a className="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Creator/Seller Panel
+            </a>
+            <ul className='dropdown-menu dropdown-menu-start'>
+                <li><Link className="dropdown-item" to="/seller/register">Register</Link></li>
+                <li><Link className="dropdown-item" to="/seller/login">Log In</Link></li>
+                <li><hr className="dropdown-divider" /></li> {/* Remove the dot above the dropdown */}
+                <li><Link className="dropdown-item" to="/seller/dashboard">Dashboard</Link></li>
+                <li><Link className="dropdown-item" to="/seller/logout">Log Out</Link></li>
+            </ul>
+        </li>
+        <li className='nav-item'>
+            <Link className='nav-link' aria-current="page" to="/checkout">New Orders</Link>
+        </li>
+    </ul>
+</div>
+
+
+
 
         </Toolbar>
       </AppBar>
