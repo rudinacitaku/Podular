@@ -1,15 +1,40 @@
 import React from 'react';
 import '@fortawesome/fontawesome-free/css/all.min.css';
+import { Link } from 'react-router-dom';
 import logo from './logo.svg';
+import SinglePodcast from './SinglePodcast';
 
 
 function Browse() {
+  const podcasts=[
+    {
+      'title':'Podcast 1',
+      'price':100
+    },
+    {
+      'title':'Podcast 2',
+      'price':100
+    },
+    {
+      'title':'Podcast 3',
+      'price':100
+    },
+    {
+      'title':'Podcast 4',
+      'price':100
+    },
+  ]
   return (
     <>
       {/* Latest Podcasts */}
       <main className='mt-4'>
         <div className='container'>
           <h3 className='mb-4'>Latest Podcasts <a href='#' className='float-end btn btn-dark'>View All Podcasts <i className="fas fa-arrow-right"></i></a></h3>
+          <div className='row mb-4'>
+            {
+              podcasts.map((podcast)=> <SinglePodcast podcast={podcast} />)
+            }
+          </div>
         </div>
       </main>
       

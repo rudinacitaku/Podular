@@ -8,3 +8,6 @@ admin.site.register(models.Podcast)
 admin.site.register(models.Customer)
 admin.site.register(models.CustomerAddress)
 
+#Podcast Image
+admin.site.register(models.PodcastImage)
+

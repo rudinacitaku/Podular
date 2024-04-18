@@ -41,3 +41,11 @@ class CustomerAddress(models.Model):
 
     def __str__(self):
           return self.address
+      
+# Product Images Model
+class PodcastImage(models.Model):
+    podcast=models.ForeignKey(Podcast, on_delete=models.CASCADE,related_name='podcast_imgs')
+    image=models.ImageField(upload_to='podcast_imgs/',null=True)
+    
+    def __str__(self):
+          return self.image.url
