@@ -19,6 +19,11 @@ import AddProduct from './components/Seller/AddProduct';
 import SellerOrders from './components/Seller/SellerOrders';
 import Customers from './components/Seller/Customers';
 
+//Customer panel
+import Register from './components/Customer/Register';
+import Login from './components/Customer/Login';
+
+
 function App() {
   const navWidth = 220
   return (
@@ -42,6 +47,10 @@ function App() {
             <Route path='/seller/add-product' element={<AddProduct/>}/>
             <Route path='/seller/orders' element={<SellerOrders/>}/>
             <Route path='/seller/customers' element={<Customers/>}/>
+
+            {/*Customer Routes*/}
+            <Route path='/customer/register' element={<Register/>}/>
+            <Route path='/customer/login' element={<Login/>}/>
 
           </Routes>
         
