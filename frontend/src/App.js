@@ -22,6 +22,7 @@ import Customers from './components/Seller/Customers';
 //Customer panel
 import Register from './components/Customer/Register';
 import Login from './components/Customer/Login';
+import Dashboard from './components/Customer/Dashboard';
 
 
 function App() {
@@ -51,6 +52,7 @@ function App() {
             {/*Customer Routes*/}
             <Route path='/customer/register' element={<Register/>}/>
             <Route path='/customer/login' element={<Login/>}/>
+            <Route path='/customer/dashboard' element={<Dashboard/>}/>
 
           </Routes>
         

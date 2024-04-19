@@ -21,15 +21,15 @@ function Register(props){
                                 <label for="username" className="form-label">Username</label>
                                 <input type="text" className="form-control" id="username"/>
                             </div>
-                            <div class="mb-3 text-start">
+                            <div className="mb-3 text-start">
                                 <label for="email" className="form-label">Email</label>
                                 <input type="email" className="form-control" id="email"/>
                             </div>
-                            <div class="mb-3 text-start">
+                            <div className="mb-3 text-start">
                                 <label for="pwd" className="form-label">Password</label>
                                 <input type="password" className="form-control" id="pwd"/>
                             </div>
-                            <button type="submit" class="btn btn-primary">Submit</button>
+                            <button type="submit" className="btn btn-primary">Submit</button>
                             </form>
                         </div>
                     </div>
