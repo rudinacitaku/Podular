@@ -22,7 +22,7 @@ function Dashboard(props){
                                     <h4>Profile Settings</h4>
                                     <h6><a href="#" className="text-success">Language</a></h6>
                                     <h6><a href="#" className="text-success">Content Preferences</a></h6>
-                                    <h6><a href="#" className="text-success">Address</a></h6>
+                                    <h6><a href="/customer/addresses" className="text-success">Address</a></h6>
                                     <h6><a href="#" className="text-success">Change Password</a></h6>
                                 </div>
                             </div>

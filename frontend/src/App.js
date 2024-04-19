@@ -23,6 +23,8 @@ import Customers from './components/Seller/Customers';
 import Register from './components/Customer/Register';
 import Login from './components/Customer/Login';
 import Dashboard from './components/Customer/Dashboard';
+import AddressList from './components/Customer/AddressList';
+import AddAddress from './components/Customer/AddAddress';
 
 
 function App() {
@@ -53,6 +55,9 @@ function App() {
             <Route path='/customer/register' element={<Register/>}/>
             <Route path='/customer/login' element={<Login/>}/>
             <Route path='/customer/dashboard' element={<Dashboard/>}/>
+            <Route path='/customer/addresses' element={<AddressList/>}/>
+            <Route path='/customer/add-address' element={<AddAddress/>}/>
+
 
           </Routes>
         
