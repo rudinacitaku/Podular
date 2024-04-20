@@ -19,6 +19,7 @@ class PodcastDetails(generics.RetrieveUpdateDestroyAPIView):
     queryset=models.Podcast.objects.all()
     serializer_class=serializers.PodcastDetailSerializer
 
+#Customers
 class CustomerList(generics.ListCreateAPIView):
     queryset=models.Customer.objects.all()
     serializer_class=serializers.CustomerSerializer
@@ -30,4 +31,14 @@ class CustomerDetails(generics.RetrieveUpdateDestroyAPIView):
 class CustomerAddressViewSet(viewsets.ModelViewSet):
     serializer_class=serializers.CustomerAddressSerializer
     queryset=models.CustomerAddress.objects.all()
+
+class CustomerAddressList(generics.ListAPIView):
+    queryset=models.CustomerAddress.objects.all()
+    serializer_class=serializers.CustomerAddressSerializer
+
+    def get_queryset(self):
+        qs=super().get_queryset()
+        customer_id=self.kwargs['pk']
+        qs=qs.filter(customer_id=customer_id)
+        return qs
     

@@ -1,6 +1,26 @@
 import { Link } from "react-router-dom";
+//import Sidebar from './Sidebar';
+import { useEffect, useState } from "react";
+const baseUrl='http://127.0.0.1:8000/api';
 
 function AddressList(){
+    var customer_id=localStorage.getItem('customer_id');
+
+    const [AddressList, setAddressList]=useState([]);
+    useEffect(() => {
+        fetchData(baseUrl+'/customer/'+customer_id+'/address-list/');
+    },[]);
+    function fetchData(baseUrl){
+        fetch(baseUrl)
+        .then((response) => response.json())
+        .then((data) => {
+            setAddressList(data.results);
+        });
+    }
+
+    console.log(AddressList);
+
+
     return(
         <div className="container mt-4">
             <div className="row">
@@ -14,56 +34,20 @@ function AddressList(){
                         </div>
                     </div>
                     <div className="row">
-                    <div className="col-4 mb-4">
-                            <div className="card">
-                                <div className="card-body text-muted">
-                                    <h6>
-                                        <i className="fa fa-check-circle text-success mb-2"/><br/>
-                                        UBT-Qendra: Bulevardi Bill Klinton,10000 Prishtina, Kosovo
-                                    </h6>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="col-4 mb-4">
-                            <div className="card">
-                                <div className="card-body text-muted">
-                                    <h6>
-                                        <span className="badge bg-secondary mb-2">Make default</span><br/>
-                                        UBT-Prishtine: Lagjja Kalabria,10000 Prishtine, Kosovo
-                                    </h6>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="col-4 mb-4">
-                            <div className="card">
-                                <div className="card-body text-muted">
-                                    <h6>
-                                        <span className="badge bg-secondary mb-2">Make default</span><br/>
-                                        UBT-Lipjan: Innovation Campus, 14000 Lipjan, Kosovo
-                                    </h6>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="col-4 mb-4">
-                            <div className="card">
-                                <div className="card-body text-muted">
-                                    <h6>
-                                        <span className="badge bg-secondary mb-2">Make default</span><br/>
-                                        UBT-Ferizaj: Ahmet Kaçiku,70000 Ferizaj, Kosovo
-                                    </h6>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="col-4 mb-4">
-                            <div className="card">
-                                <div className="card-body text-muted">
-                                    <h6>
-                                        <span className="badge bg-secondary mb-2">Make default</span><br/>
-                                        UBT-Gjilan: Rruga e Ferizajit, M25-3,60000 Gjilan, Kosovo
-                                    </h6>
-                                </div>
-                            </div>
-                        </div>
+                        {
+                            AddressList.map((address,index)=>{
+                                return <div className="col-4 mb-4">
+                                            <div className="card">
+                                                <div className="card-body text-muted">
+                                                <h6>
+                                                    {address.default_address && <span><i className="fa fa-check-circle text-success mb-2"/><br/></span>}
+                                                    {address.address}
+                                                </h6>
+                                            </div>
+                                        </div>
+                                    </div>
+                            })
+                        }
                     </div>
                 </div>
             </div>
