@@ -8,6 +8,9 @@ function SellerSidebar(){
             <Link to="/seller/add-product"className='list-group-item list-group-item-action'> Add Podcast </Link>
             <Link to="/seller/customers"className='list-group-item list-group-item-action'> Customers</Link>
             <Link to="/seller/reports"className='list-group-item list-group-item-action'> Reports</Link>
+            <Link to="/seller/profile"className='list-group-item list-group-item-action'> Profile</Link>
+            <Link to="/seller/change-password"className='list-group-item list-group-item-action'> Change Password</Link>
+
             <a href="#"className='list-group-item list-group-item-action text-danger'> Log Out</a>
         </div>
     )

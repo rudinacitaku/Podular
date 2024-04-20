@@ -23,7 +23,19 @@ function Customers() {
                   <td>$$$</td>
                   <td>Available</td>
                   <td>
-                    <a href="#" className="btn btn-danger ms-1">Remove from List</a>
+                    <button className="btn btn-primary btn-sm">Orders</button>
+                    <button className="btn btn-danger btn-sm ms-1">Remove from List</button>
+                    
+                  </td>
+                </tr>
+                <tr>
+                  <td>2</td>
+                  <td>Totebag</td>
+                  <td>$$$</td>
+                  <td>Available</td>
+                  <td>
+                    <button className="btn btn-primary btn-sm">Orders</button>
+                    <button className="btn btn-danger btn-sm ms-1">Remove from List</button>
                   </td>
                 </tr>
               </tbody>

@@ -18,6 +18,9 @@ import SellerProducts from './components/Seller/SellerProducts';
 import AddProduct from './components/Seller/AddProduct';
 import SellerOrders from './components/Seller/SellerOrders';
 import Customers from './components/Seller/Customers';
+import Reports from './components/Seller/Reports';
+import SellerProfile from './components/Seller/SellerProfile';
+
 
 //Customer panel
 import Register from './components/Customer/Register';
@@ -25,6 +28,7 @@ import Login from './components/Customer/Login';
 import Dashboard from './components/Customer/Dashboard';
 import AddressList from './components/Customer/AddressList';
 import AddAddress from './components/Customer/AddAddress';
+import SellerChangePassword from './components/Seller/SellerChangePassword';
 
 
 function App() {
@@ -50,6 +54,9 @@ function App() {
             <Route path='/seller/add-product' element={<AddProduct/>}/>
             <Route path='/seller/orders' element={<SellerOrders/>}/>
             <Route path='/seller/customers' element={<Customers/>}/>
+            <Route path='/seller/reports' element={<Reports/>}/>
+            <Route path='/seller/profile' element={<SellerProfile/>}/>
+            <Route path='/seller/seller-change-password' element={<SellerChangePassword/>}/>
 
             {/*Customer Routes*/}
             <Route path='/customer/register' element={<Register/>}/>
