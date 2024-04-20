@@ -1,12 +1,13 @@
 import { Link } from "react-router-dom";
 //import Sidebar from './Sidebar';
 import { useEffect, useState } from "react";
+import axios from "axios";
 const baseUrl='http://127.0.0.1:8000/api';
 
 function AddressList(){
     var customer_id=localStorage.getItem('customer_id');
     const [AddressList, setAddressList]=useState([]);
-    
+
     useEffect(() => {
         fetchData(baseUrl+'/customer/'+customer_id+'/address-list/');
     },[]);
@@ -18,7 +19,21 @@ function AddressList(){
         });
     }
 
-    console.log(AddressList);
+    function DefaultAddressHandler(address_id){
+        const formData=new FormData();;
+        formData.append('address_id',address_id);
+
+        axios.post(baseUrl+'/mark-default-address/'+parseInt(address_id)+'/',formData)
+        .then(function(response){
+            if(response.data.bool==true){
+               window.location.reload();
+            }
+           
+        })
+        .catch(function(error){
+            console.log(error);
+        });
+    }
 
 
     return(
@@ -41,7 +56,10 @@ function AddressList(){
                                                 <div className="card-body text-muted">
                                                 <h6>
                                                     {
-                                                    address.default_address && <span><i className="fa fa-check-circle text-success mb-2"/><br/></span>
+                                                    address.default_address==true && <span role="button"><i className="fa fa-check-circle text-success mb-2"/><br/></span>
+                                                    }
+                                                    {
+                                                    address.default_address && <span onClick={()=>DefaultAddressHandler(address.id)} role="button"><i className="far fa-check-circle text-secondary mb-2"/><br/></span>
                                                     }
                                                     <Link to={`/customer/update-address/${address.id}`}>{address.address}</Link>
                                                 </h6>
