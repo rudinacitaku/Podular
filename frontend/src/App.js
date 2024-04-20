@@ -29,6 +29,7 @@ import Dashboard from './components/Customer/Dashboard';
 import AddressList from './components/Customer/AddressList';
 import AddAddress from './components/Customer/AddAddress';
 import SellerChangePassword from './components/Seller/SellerChangePassword';
+import UpdateAddress from './components/Customer/UpdateAddress';
 
 
 function App() {
@@ -64,6 +65,7 @@ function App() {
             <Route path='/customer/dashboard' element={<Dashboard/>}/>
             <Route path='/customer/addresses' element={<AddressList/>}/>
             <Route path='/customer/add-address' element={<AddAddress/>}/>
+            <Route path='/customer/update-address/:address_id' element={<UpdateAddress/>}/>
 
 
           </Routes>
