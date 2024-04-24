@@ -8,7 +8,8 @@ import Navbar from './components/NavBar';
 import Shop from './components/Shop';
 import Following from './components/Following';
 import Favorites from './components/Favorites';
-import 'bootstrap/dist/css/bootstrap.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
+
 
 //Seller panel
 import SellerRegister from './components/Seller/SellerRegister';

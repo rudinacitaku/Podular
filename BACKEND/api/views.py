@@ -3,6 +3,8 @@ from django.views.decorators.csrf import csrf_exempt
 from . import serializers
 from rest_framework import generics, permissions, viewsets
 from . import models
+from django.db import IntegrityError
+from django.contrib.auth.models import User 
 
 
 class CreatorList(generics.ListCreateAPIView):
@@ -59,3 +61,57 @@ def mark_default_address(request,pk):
         }
     return JsonResponse(msg)
     
+@csrf_exempt
+def creator_register(request):
+    if request.method == "POST":
+        first_name = request.POST.get('first_name')
+        last_name = request.POST.get('last_name')
+        mobile = request.POST.get('mobile')
+        email = request.POST.get('email')
+        address = request.POST.get('address')
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+
+        try:
+            # Create user with hashed password and other relevant fields
+            user = User.objects.create_user(
+                first_name=first_name,
+                last_name=last_name,
+                email=email,
+                username=username,
+                password=password  # Automatically hashes the password
+            )
+            # Create the creator profile linked to the user
+            creator = models.Creator.objects.create(
+                user=user,
+                mobile=mobile,
+                address=address
+            )
+            return JsonResponse({
+                'bool': True,
+                'user': user.id,
+                'creator': creator.id,
+                'msg': 'You have successfully registered. You can log in now!'
+            })
+
+        except IntegrityError as e:
+            if 'username' in str(e):
+                return JsonResponse({
+                    'bool': False,
+                    'msg': 'Username already exists!'
+                })
+            elif 'mobile' in str(e):
+                return JsonResponse({
+                    'bool': False,
+                    'msg': 'Mobile already is registered!'
+                })
+            else:
+                return JsonResponse({
+                    'bool': False,
+                    'msg': 'Something went wrong!'
+                }, status=400)
+
+    return JsonResponse({
+        'bool': False,
+        'msg': 'Invalid request'
+    }, status=400)

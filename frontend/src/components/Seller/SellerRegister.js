@@ -1,23 +1,60 @@
 import React, { useState } from 'react';
+import axios from 'axios';
 
-const SellerRegister = () => {
+function SellerRegister(props) {
+  const baseUrl = 'http://127.0.0.1:8000/api/';
+
   // State for storing form input values
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [errorMsg, setErrorMsg] = useState('');
+  const [successMsg, setSuccessMsg] = useState('');
+  const [registerFormData, setRegisterFormData] = useState({
+    first_name: '',
+    last_name: '',
+    username: '',
+    email: '',
+    mobile: '',
+    address: '',
+    password: '',
+  });
 
-  // Function to handle form submission
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    // Here you can add your register logic, such as sending a request to your backend API
-    console.log('Name:', name);
-    console.log('Email:', email);
-    console.log('Password:', password);
-    // Reset form fields after submission (optional)
-    setName('');
-    setEmail('');
-    setPassword('');
+  const inputHandler = (event) => {
+    setRegisterFormData({
+      ...registerFormData,
+      [event.target.name]: event.target.value
+    });
   };
+
+  const submitHandler = (event) => {
+    const formData = new FormData();
+    for (const key in registerFormData) {
+      formData.append(key, registerFormData[key]);
+    }
+
+    axios.post(baseUrl + 'creators/register', formData)
+      .then(response => {
+        if (response.data.bool === false) {
+          setErrorMsg(response.data.msg);
+          setSuccessMsg('');
+        } else {
+          setRegisterFormData({
+            first_name: '',
+            last_name: '',
+            username: '',
+            email: '',
+            mobile: '',
+            address: '',
+            password: '',
+          });
+          setErrorMsg('');
+          setSuccessMsg(response.data.msg);
+        }
+      })
+      .catch(error => {
+        console.error('Registration Error:', error);
+      });
+  };
+
+  const buttonEnable = Object.values(registerFormData).every(value => value.trim() !== '');
 
   return (
     <div className="container">
@@ -26,41 +63,38 @@ const SellerRegister = () => {
           <div className="card">
             <div className="card-body">
               <h2 className="card-title text-center mb-4">Seller Register</h2>
-              <form onSubmit={handleSubmit}>
+              {successMsg && <p className="text-success">{successMsg}</p>}
+              {errorMsg && <p className="text-danger">{errorMsg}</p>}
+              <form>
                 <div className="mb-3">
-                  <label htmlFor="name" className="form-label">Name</label>
-                  <input
-                    type="text"
-                    className="form-control"
-                    id="name"
-                    value={name}
-                    onChange={(e) => setName(e.target.value)}
-                    required
-                  />
+                  <label htmlFor="firstName" className="form-label">First Name</label>
+                  <input type="text" className="form-control" id="firstName" name="first_name" autoComplete="given-name" value={registerFormData.first_name} onChange={inputHandler} />
                 </div>
                 <div className="mb-3">
-                  <label htmlFor="email" className="form-label">Email address</label>
-                  <input
-                    type="email"
-                    className="form-control"
-                    id="email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    required
-                  />
+                  <label htmlFor="lastName" className="form-label">Last Name</label>
+                  <input type="text" className="form-control" id="lastName" name="last_name" autoComplete="family-name" value={registerFormData.last_name} onChange={inputHandler} />
+                </div>
+                <div className="mb-3">
+                  <label htmlFor="username" className="form-label">Username</label>
+                  <input type="text" className="form-control" id="username" name="username" autoComplete="username" value={registerFormData.username} onChange={inputHandler} />
+                </div>
+                <div className="mb-3">
+                  <label htmlFor="email" className="form-label">Email Address</label>
+                  <input type="email" className="form-control" id="email" name="email" autoComplete="email" value={registerFormData.email} onChange={inputHandler} />
+                </div>
+                <div className="mb-3">
+                  <label htmlFor="mobile" className="form-label">Mobile</label>
+                  <input type="text" className="form-control" id="mobile" name="mobile" value={registerFormData.mobile} onChange={inputHandler} />
+                </div>
+                <div className="mb-3">
+                  <label htmlFor="address" className="form-label">Address</label>
+                  <textarea className="form-control" id="address" name="address" autoComplete="address" value={registerFormData.address} onChange={inputHandler}></textarea>
                 </div>
                 <div className="mb-3">
                   <label htmlFor="password" className="form-label">Password</label>
-                  <input
-                    type="password"
-                    className="form-control"
-                    id="password"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    required
-                  />
+                  <input type="password" className="form-control" id="password" name="password" value={registerFormData.password} onChange={inputHandler} />
                 </div>
-                <button type="submit" className="btn btn-primary btn-block">Register</button>
+                <button type="button" className="btn btn-primary btn-block" disabled={!buttonEnable} onClick={submitHandler}>Register</button>
               </form>
             </div>
           </div>
@@ -68,7 +102,6 @@ const SellerRegister = () => {
       </div>
     </div>
   );
-};
+}
 
 export default SellerRegister;
-
