@@ -92,6 +92,7 @@ export default function NavBar(props) {
             </Box>
         </div>
     ) 
+    const checkCreator=localStorage.getItem('creator_login');
 
   return (
     <Box sx={{ display: 'flex' }}>
@@ -116,13 +117,15 @@ export default function NavBar(props) {
                         Creator/Seller Panel
                     </Dropdown.Toggle>
 
-                    <Dropdown.Menu>
-                        <Dropdown.Item as={Link} to="/seller/register">Register</Dropdown.Item>
-                        <Dropdown.Item as={Link} to="/seller/login">Log In</Dropdown.Item>
+                    
+                        { checkCreator && <Dropdown.Menu>
+                            <Dropdown.Item as={Link} to="/seller/dashboard">Dashboard</Dropdown.Item>
+                            <Dropdown.Item as={Link} to="/seller/logout">Log Out</Dropdown.Item>
+                            </Dropdown.Menu>}
                         <Dropdown.Divider />
-                        <Dropdown.Item as={Link} to="/seller/dashboard">Dashboard</Dropdown.Item>
-                        <Dropdown.Item as={Link} to="/seller/logout">Log Out</Dropdown.Item>
-                    </Dropdown.Menu>
+                        { !checkCreator && <Dropdown.Menu> <Dropdown.Item as={Link} to="/seller/register">Register</Dropdown.Item>
+                        <Dropdown.Item as={Link} to="/seller/login">Log In</Dropdown.Item>
+                    </Dropdown.Menu>}
                 </Dropdown>
             </li>
             <li className='nav-item'>

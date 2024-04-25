@@ -11,7 +11,7 @@ function SellerSidebar(){
             <Link to="/seller/profile"className='list-group-item list-group-item-action'> Profile</Link>
             <Link to="/seller/change-password"className='list-group-item list-group-item-action'> Change Password</Link>
 
-            <a href="#"className='list-group-item list-group-item-action text-danger'> Log Out</a>
+            <a href="/seller/logout"className='list-group-item list-group-item-action text-danger'> Log Out</a>
         </div>
     )
 }

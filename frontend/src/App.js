@@ -14,6 +14,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 //Seller panel
 import SellerRegister from './components/Seller/SellerRegister';
 import SellerLogin from './components/Seller/SellerLogin';
+import SellerLogout from './components/Seller/SellerLogout';
 import SellerDashboard from './components/Seller/SellerDashboard';
 import SellerProducts from './components/Seller/SellerProducts';
 import AddProduct from './components/Seller/AddProduct';
@@ -51,6 +52,7 @@ function App() {
             {/*Seller Routes*/}
             <Route path="/seller/register" element={<SellerRegister/>} />
             <Route path="/seller/login" element={<SellerLogin/>} />
+            <Route path="/seller/logout" element={<SellerLogout/>}/>
             <Route path="/seller/dashboard" element={<SellerDashboard/>} />
             <Route path="/seller/products" element={<SellerProducts/>} />
             <Route path='/seller/add-product' element={<AddProduct/>}/>

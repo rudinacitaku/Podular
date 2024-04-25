@@ -5,6 +5,8 @@ from rest_framework import generics, permissions, viewsets
 from . import models
 from django.db import IntegrityError
 from django.contrib.auth.models import User 
+from django.contrib.auth import authenticate
+
 
 #Creators
 class CreatorList(generics.ListCreateAPIView):
@@ -72,23 +74,38 @@ def creator_register(request):
 
 @csrf_exempt
 def creator_login(request):
-    username=request.POST.get('username')
-    password=request.POST.get('password')
-    user=authenticate(username=username, password=password)
+    if request.method == 'POST':
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+        user = authenticate(username=username, password=password)
 
-    if user:
-        creator=models.Creator.objects.get(user=user)
-        msg={
-            'bool':True,
-            'user':user.username,
-            'id':creator.id
-        }
+        if user:
+            try:
+                creator = models.Creator.objects.get(user=user)
+                msg = {
+                    'bool': True,
+                    'user': user.username,
+                    'id': creator.id
+                }
+                return JsonResponse(msg)  # Ensure response is returned here
+            except models.Creator.DoesNotExist:
+                # Handle case where user is authenticated but no creator is associated
+                return JsonResponse({
+                    'bool': False,
+                    'msg': 'No creator associated with this user'
+                }, status=404)
+        else:
+            msg = {
+                'bool': False,
+                'msg': 'Invalid username or password'
+            }
+            return JsonResponse(msg, status=401)  # Use appropriate status for unauthorized access
+
     else:
-        msg={
-            'bool':False,
-            'msg':'Invalid username/password'
-        }
-        return JsonResponse(msg)
+        # Handle incorrect request method
+        return JsonResponse({
+            'msg': 'Invalid request method'
+        }, status=405)
 
 #Podcasts
 class PodcastList(generics.ListCreateAPIView):
