@@ -102,14 +102,15 @@ function AddProduct() {
                 <div className='card-body'>
                 {SuccessMsg && <p className="text-success">{SuccessMsg}</p>}
                 {ErrorMsg && <p className="text-danger">{ErrorMsg}</p>}
-                  <form>
-                    <div className='mb-3'>
-                      <label htmlFor='Category' className='form-label'>Category</label>
-                      <select className='form-control' name='category' onChange={inputHandler}>
-
-                        {
-                          PodcastCategoryData.map((item, index)=><option value={item.id}>{item.title}</option>)
-                        }
+                <form>
+                  <div className='mb-3'>
+                  <label htmlFor='category' className='form-label'>Category</label>  
+                  <select id='category' className='form-control' name='category' onChange={inputHandler}>
+                    {
+                    PodcastCategoryData.map((item, index) => (
+                      <option key={index} value={item.id}>{item.title}</option>  // Added key for React elements in lists
+                    ))
+                    }
                         {/*
                         <option value='comedy'>Comedy</option>
                         <option value='history'>History</option>
@@ -123,19 +124,19 @@ function AddProduct() {
                       </select>
                     </div>
                     <div className='mb-3'>
-                      <label htmlFor='title' className='form-label'>Title</label>
+                      <label for='title' className='form-label'>Title</label>
                       <input type='text' name="title" value={PodcastData.title} onChange={inputHandler} className='form-control' id='title' />
                     </div>
                     <div className='mb-3'>
-                      <label htmlFor='price' className='form-label'>Price</label>
+                      <label for='price' className='form-label'>Price</label>
                       <input type='number' name="price" value={PodcastData.price} onChange={inputHandler} className='form-control' id='price' />
                     </div>
                     <div className='mb-3'>
-                      <label htmlFor='description' className='form-label'>Description</label>
+                      <label for='description' className='form-label'>Description</label>
                       <textarea className='form-control' name="detail" value={PodcastData.detail} onChange={inputHandler} rows='8' id='description' />
                     </div>
                     <div className='mb-3'>
-                      <label htmlFor='productImg' className='form-label'>Podcast Image</label>
+                      <label for='productImg' className='form-label'>Podcast Image</label>
                       <input type='file' className='form-control' name="image" onChange={fileHandler} id='productImg' />
                     </div>
                     <button type="submit" onClick={submitHandler} className='btn btn-primary'>Submit</button>

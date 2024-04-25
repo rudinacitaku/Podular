@@ -12,6 +12,7 @@ urlpatterns = [
     path('creators/', views.CreatorList.as_view()),
     path('creators/<int:pk>', views.CreatorDetails.as_view()),
     path('creators/register', creator_register, name='creator_register'),
+    path('creators/login', views.creator_login, name='creator_login'),
     #Podcasts
     path('podcasts/', views.PodcastList.as_view()),
     path('podcast/<int:pk>', views.PodcastDetails.as_view()),
