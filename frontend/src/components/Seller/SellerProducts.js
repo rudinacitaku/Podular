@@ -1,8 +1,23 @@
 import React from 'react';
 import SellerSidebar from './SellerSidebar';
+import { useEffect,useState } from 'react';
 import { Link } from 'react-router-dom';
+const baseUrl='http://127.0.0.1:8000/api/';
 
 function SellerProducts(props) {
+    const [PodcastData,setPodcastData]=useState([]);
+    useEffect(() => {
+        fetchData(baseUrl+'products/');
+      }, []);
+    
+    
+      function fetchData(baseurl){
+        fetch(baseurl)
+        .then((response) => response.json())
+        .then((data) => {
+          setPodcastData(data.results);
+        });
+      }
     return (
         <div className='container mt-4'>
             <div className='row'>
@@ -22,22 +37,27 @@ function SellerProducts(props) {
                                     <th>Title</th>
                                     <th>Description</th>
                                     <th>Image</th>
+                                    <th>Price</th>
                                     <th>Actions</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>1</td>
-                                    <td>Comedy</td>
-                                    <td>Podcast title</td>
-                                    <td>Random</td>
-                                    <td>None</td>
-                                    <td>
-                                        <a href='#' className='btn btn-info'>View</a>
-                                        <a href='#' className='btn btn-primary ms-1'>Edit</a>
-                                        <a href='#' className='btn btn-danger ms-1'>Delete</a>
-                                    </td>
-                                </tr>
+                                {
+                                    PodcastData.map((podcast,index)=><tr>
+                                        <td>{podcast.id}</td>
+                                        <td>{podcast.category}</td>
+                                        <td>{podcast.title}</td>
+                                        <td>{podcast.image}</td>
+                                        <td>{podcast.price}</td>
+                                        <td>None</td>
+                                        <td>
+                                            <a href='#' className='btn btn-info'>View</a>
+                                            <a href='#' className='btn btn-primary ms-1'>Edit</a>
+                                            <a href='#' className='btn btn-danger ms-1'>Delete</a>
+                                        </td>
+                                    </tr>)
+                                }
+                                
                             </tbody>
                         </table>
                     </div>
