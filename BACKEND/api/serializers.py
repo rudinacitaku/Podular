@@ -20,6 +20,7 @@ class CreatorDetailSerializer(serializers.ModelSerializer):
         self.Meta.depth = 1
         
 class PodcastListSerializer(serializers.ModelSerializer):
+    podcast_imgs=PodcastImageSerializer(many=True, read_only=True)
     class Meta:
         model=models.Podcast
         fields=['id','category','title', 'detail','vendor','price','image']
@@ -28,6 +29,11 @@ class PodcastListSerializer(serializers.ModelSerializer):
         super(PodcastListSerializer, self).__init__(*args, **kwargs)
         #    self.Meta.depth = 1
 
+class PodcastImageSerializer(serializers.ModelSerializer):
+    class Meta:
+        model=models.PodcastImage
+        fields=['id','podcast', 'image']
+        
 class PodcastDetailSerializer(serializers.ModelSerializer):
     class Meta:
         model=models.Podcast

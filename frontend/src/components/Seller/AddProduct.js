@@ -7,6 +7,7 @@ function AddProduct() {
   const vendor_id=localStorage.getItem('vendor_id');
   const [ErrorMsg,setErrorMsg]=useState('');
   const [SuccessMsg,setSuccessMsg]=useState('');
+
   const [PodcastCategoryData, setPodcastCategoryData]=useState([]);
   const [PodcastData, setPodcastData]=useState({
     'category':'',
@@ -16,6 +17,10 @@ function AddProduct() {
     'price':'',
     'image':''
   });
+
+  const [ImgUploadErrorMsg,setImgUploadErrorMsg]=useState('');
+  const [ImgUploadSuccessMsg,setImgUploadSuccessMsg]=useState('');
+  const [PodcastImgs,setPodcastImgs]=useState([]);
 
   const inputHandler = (event) =>{
     setPodcastData({
@@ -30,6 +35,13 @@ function AddProduct() {
       [event.target.name]:event.target.files[0]
     })
   };
+
+  const multipleFilesHandler = (event) =>{
+    var files=event.target.files;
+    if(files.length>0){
+      setPodcastImgs(files);
+    }
+  }
 
   const submitHandler = () =>{
     const formData=new FormData();
@@ -49,9 +61,6 @@ function AddProduct() {
     .then(function (response){
       console.log(response);
       if(response.status == 201){
-        setErrorMsg('')
-        setSuccessMsg(response.statusText);
-      }else{
         setPodcastData({
           'category':'',
           'vendor':'',
@@ -62,6 +71,26 @@ function AddProduct() {
         });
         setErrorMsg('');
         setSuccessMsg(response.statusText);
+
+      for(let i=0;i<PodcastImgs.length;i++){
+        const ImageFormData=new FormData();
+        ImageFormData.append('podcast',response.data.id);
+        ImageFormData.append('image',PodcastImgs[i]);
+        // Submit multiple Images
+        axios.post(baseUrl + 'podcast-imgs/', ImageFormData)
+        .then(response => {
+            console.log(response);
+        })
+        .catch(error => {
+          console.log(error);
+        });
+      }
+
+      setPodcastImgs('');
+      
+      }else{
+        setSuccessMsg('');
+        setErrorMsg(response.statusText);
       }
     })
     .catch(function (error) {
@@ -69,7 +98,6 @@ function AddProduct() {
     });
     
   }
-
 
   useEffect(() => {
     setPodcastData({
@@ -137,7 +165,7 @@ function AddProduct() {
                     </div>
                     <div className='mb-3'>
                       <label for='productImg' className='form-label'>Podcast Image</label>
-                      <input type='file' className='form-control' name="image" onChange={fileHandler} id='productImg' />
+                      <input type='file' className='form-control' name="image" onChange={fileHandler} id='podcastImg' />
                     </div>
                     <button type="submit" onClick={submitHandler} className='btn btn-primary'>Submit</button>
                   </form>

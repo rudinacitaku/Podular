@@ -115,6 +115,10 @@ class PodcastList(generics.ListCreateAPIView):
 class PodcastDetails(generics.RetrieveUpdateDestroyAPIView):
     queryset=models.Podcast.objects.all()
     serializer_class=serializers.PodcastDetailSerializer
+    
+class PodcastImgsList(generics.ListCreateAPIView):
+    queryset=models.PodcastImage.objects.all()
+    serializer_class=serializers.PodcastImageSerializer
 
 #Customers
 class CustomerList(generics.ListCreateAPIView):
