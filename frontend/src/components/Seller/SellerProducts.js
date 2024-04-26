@@ -46,7 +46,7 @@ function SellerProducts(props) {
                                     PodcastData.map((podcast,index)=><tr>
                                         <td>{podcast.id}</td>
                                         <td>{podcast.category}</td>
-                                        <td>{podcast.title}</td>
+                                        <td><Link to={'/seller/update-product/${podcast.id}'}>{podcast.title}</Link></td>
                                         <td>{podcast.image}</td>
                                         <td>{podcast.price}</td>
                                         <td>None</td>

@@ -18,6 +18,7 @@ import SellerLogout from './components/Seller/SellerLogout';
 import SellerDashboard from './components/Seller/SellerDashboard';
 import SellerProducts from './components/Seller/SellerProducts';
 import AddProduct from './components/Seller/AddProduct';
+import UpdateProduct from './components/Seller/UpdateProduct';
 import SellerOrders from './components/Seller/SellerOrders';
 import Customers from './components/Seller/Customers';
 import Reports from './components/Seller/Reports';
@@ -56,6 +57,7 @@ function App() {
             <Route path="/seller/dashboard" element={<SellerDashboard/>} />
             <Route path="/seller/products" element={<SellerProducts/>} />
             <Route path='/seller/add-product' element={<AddProduct/>}/>
+            <Route path='/seller/update-product/:podcast_id' element={<UpdateProduct/>}/>
             <Route path='/seller/orders' element={<SellerOrders/>}/>
             <Route path='/seller/customers' element={<Customers/>}/>
             <Route path='/seller/reports' element={<Reports/>}/>
