@@ -10,6 +10,8 @@ function UpdateProduct() {
   const [ErrorMsg,setErrorMsg]=useState('');
   const [SuccessMsg,setSuccessMsg]=useState('');
 
+  const [IsMultiplePodcastImagesSelected,setIsMultiplePodcastImagesSelected]=useState(false);
+
   const [PodcastCategoryData, setPodcastCategoryData]=useState([]);
   const [PodcastData, setPodcastData]=useState({
     'category':'',
@@ -17,7 +19,8 @@ function UpdateProduct() {
     'title':'',
     'detail':'',
     'price':'',
-    'image':''
+    'image':'',
+    'podcast_imgs':'',
   });
 
   const [ImgUploadErrorMsg,setImgUploadErrorMsg]=useState('');
@@ -41,6 +44,7 @@ function UpdateProduct() {
   const multipleFilesHandler = (event) =>{
     var files=event.target.files;
     if(files.length>0){
+      setIsMultiplePodcastImagesSelected(true);
       setPodcastImgs(files);
     }
   }
@@ -62,34 +66,38 @@ function UpdateProduct() {
 
     .then(function (response){
       console.log(response);
-      if(response.status == 201){
-        setPodcastData({
+      if(response.status == 200){
+        {/*setPodcastData({
           'category':'',
           'vendor':'',
           'title':'',
-          'detail':'',
+          'detail':'', #70-maybe should delete-E 
           'price':'',
           'image':''
         });
+        */}
         setErrorMsg('');
         setSuccessMsg(response.statusText);
 
-      for(let i=0;i<PodcastImgs.length;i++){
-        const ImageFormData=new FormData();
-        ImageFormData.append('podcast',response.data.id);
-        ImageFormData.append('image',PodcastImgs[i]);
-        // Submit multiple Images
-        axios.post(baseUrl + 'podcast-imgs/', ImageFormData)
-        .then(response => {
-            console.log(response);
-        })
-        .catch(error => {
-          console.log(error);
-        });
-      }
+        console.log(IsMultiplePodcastImagesSelected);
+        if(IsMultiplePodcastImagesSelected){
+          for(let i=0;i<PodcastImgs.length;i++){
+            const ImageFormData=new FormData();
+            ImageFormData.append('podcast',response.data.id);
+            ImageFormData.append('image',PodcastImgs[i]);
+            // Submit multiple Images
+            axios.post(baseUrl + 'podcast-imgs/', ImageFormData)
+            .then(response => {
+                console.log(response);
+            })
+            .catch(error => {
+              console.log(error);
+            });
+          }
 
-      setPodcastImgs('');
+        }
       
+
       }else{
         setSuccessMsg('');
         setErrorMsg(response.statusText);
@@ -119,6 +127,7 @@ function UpdateProduct() {
     });
   }
 
+
   function fetchPodcastData(baseurl){
     fetch(baseurl)
     .then((response) => response.json())
@@ -131,11 +140,10 @@ function UpdateProduct() {
         'detail':data.detail,
         'price':data.price,
         'image':data.image,
+        'podcast_imgs':data.podcast_imgs,
       });
     });
   }
-
-
 
 
   return (
@@ -185,6 +193,10 @@ function UpdateProduct() {
                     <div className='mb-3'>
                       <label for='productImg' className='form-label'>Podcast Image</label>
                       <input type='file' className='form-control' name="image" onChange={fileHandler} id='podcastImg' />
+                      <img src={PodcastData.image} className='img rounded border mt-2' width="200"/>
+                      {
+                        PodcastData.podcast_imgs && PodcastData.podcast_imgs.map((img,val)=><img src={img.image} className='mt-2 me-2' width="200"/>)
+                      }
                     </div>
                     <button type="submit" onClick={submitHandler} className='btn btn-primary'>Submit</button>
                   </form>
