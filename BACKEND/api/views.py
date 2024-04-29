@@ -132,6 +132,10 @@ class PodcastImgsDetail(generics.ListCreateAPIView):
         podcast_id=self.kwargs['podcast_id']
         qs=qs.filter(podcast_id=podcast_id)
         return qs
+    
+class PodcastImgDetail(generics.RetrieveUpdateDestroyAPIView):
+    queryset=models.PodcastImage.objects.all()
+    serializer_class=serializers.PodcastImageSerializer
 
 #Customers
 class CustomerList(generics.ListCreateAPIView):

@@ -18,6 +18,7 @@ urlpatterns = [
     path('podcast/<int:pk>', views.PodcastDetails.as_view()),
     path('podcast-imgs/', views.PodcastImgsList.as_view()),
     path('podcast-imgs/<int:podcast_id>', views.PodcastImgsDetail.as_view()),
+    path('podcast-img/<int:pk>', views.PodcastImgDetail.as_view()),
     #customers
     path('customers/', views.CustomerList.as_view()),
     path('customers/<int:pk>', views.CustomerDetails.as_view()),

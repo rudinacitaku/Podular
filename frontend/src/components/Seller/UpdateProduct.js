@@ -10,7 +10,9 @@ function UpdateProduct() {
   const [ErrorMsg,setErrorMsg]=useState('');
   const [SuccessMsg,setSuccessMsg]=useState('');
 
+  const [IsImageDeleted,setIsImageDeleted]=useState(false);
   const [IsMultiplePodcastImagesSelected,setIsMultiplePodcastImagesSelected]=useState(false);
+
 
   const [PodcastCategoryData, setPodcastCategoryData]=useState([]);
   const [PodcastData, setPodcastData]=useState({
@@ -127,6 +129,18 @@ function UpdateProduct() {
     });
   }
 
+  function deleteImage(image_id){
+    axios.delete(baseUrl+'podcast-img'+image_id+'/')
+    .then(function (response){
+      if(response.status==204){
+        window.location.reload();
+      }
+    })
+    .catch(function (error) {
+      console.log(error);
+    })
+  }
+
 
   function fetchPodcastData(baseurl){
     fetch(baseurl)
@@ -192,11 +206,17 @@ function UpdateProduct() {
                     </div>
                     <div className='mb-3'>
                       <label for='productImg' className='form-label'>Podcast Image</label>
-                      <input type='file' className='form-control' name="image" onChange={fileHandler} id='podcastImg' />
+                      <input type='file' className='form-control mb-3' name="image" onChange={multipleFilesHandler} id='podcastImg' />
                       <img src={PodcastData.image} className='img rounded border mt-2' width="200"/>
+                      <>
                       {
-                        PodcastData.podcast_imgs && PodcastData.podcast_imgs.map((img,val)=><img src={img.image} className='mt-2 me-2' width="200"/>)
+                        PodcastData.podcast_imgs && PodcastData.podcast_imgs.map((img,index)=>
+                        <span class="image-box d-inline p-3 my-2" onClick={()=>deleteImage(img.id)}>
+                          <i class="fa fa-trash text-danger" style={styles.deleteBtn} role='button'></i>
+                          <img src={img.image} className='my-4' width="200" />
+                        </span> )
                       }
+                      </>
                     </div>
                     <button type="submit" onClick={submitHandler} className='btn btn-primary'>Submit</button>
                   </form>
@@ -212,6 +232,12 @@ function UpdateProduct() {
     </div>
   );
 }
+
+const styles = {
+  'deleteBtn':{
+    'position':'absolute',
+  }
+};
 
 export default UpdateProduct;
 
