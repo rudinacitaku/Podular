@@ -1,5 +1,6 @@
 from rest_framework import serializers
 from . import models
+from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 
 class CreatorSerializer(serializers.ModelSerializer):
     class Meta:
@@ -19,6 +20,12 @@ class CreatorDetailSerializer(serializers.ModelSerializer):
         super(CreatorDetailSerializer, self).__init__(*args, **kwargs)
         self.Meta.depth = 1
         
+
+class PodcastImageSerializer(serializers.ModelSerializer):
+    class Meta:
+        model=models.PodcastImage
+        fields=['id','podcast', 'image']
+
 class PodcastListSerializer(serializers.ModelSerializer):
     podcast_imgs=PodcastImageSerializer(many=True, read_only=True)
     class Meta:
@@ -28,11 +35,6 @@ class PodcastListSerializer(serializers.ModelSerializer):
     def __init__ (self, *args, **kwargs):
         super(PodcastListSerializer, self).__init__(*args, **kwargs)
         #    self.Meta.depth = 1
-
-class PodcastImageSerializer(serializers.ModelSerializer):
-    class Meta:
-        model=models.PodcastImage
-        fields=['id','podcast', 'image']
         
 class PodcastDetailSerializer(serializers.ModelSerializer):
     class Meta:
@@ -72,3 +74,28 @@ class CustomerAddressSerializer(serializers.ModelSerializer):
     def __init__(self, *args, **kwargs):
         super(CustomerAddressSerializer, self).__init__(*args, **kwargs)
         self.Meta.depth = 1
+
+from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
+from rest_framework import serializers
+
+class AdminTokenObtainPairSerializer(TokenObtainPairSerializer):
+    @classmethod
+    def get_token(cls, user):
+        token = super().get_token(user)
+        # Add custom claims
+        token['username'] = user.username
+        token['is_staff'] = user.is_staff
+        token['is_superuser'] = user.is_superuser
+        return token
+
+    def validate(self, attrs):
+        data = super().validate(attrs)
+        data.update({
+            'username': self.user.username,
+            'is_staff': self.user.is_staff,
+            'is_superuser': self.user.is_superuser
+        })
+        if not self.user.is_staff:
+            raise serializers.ValidationError('You must be a staff member to log in.')
+        return data
+#Admin

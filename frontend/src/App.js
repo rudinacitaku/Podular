@@ -1,6 +1,6 @@
 
 import './App.css';
-import {Routes, Route} from 'react-router-dom';
+import {Routes, Route, Navigate} from 'react-router-dom';
 import Home from './components/Home';
 import Browse from './components/Browse';
 import Create from './components/Create';
@@ -9,6 +9,11 @@ import Shop from './components/Shop';
 import Following from './components/Following';
 import Favorites from './components/Favorites';
 import 'bootstrap/dist/css/bootstrap.min.css';
+
+//Admin panel
+import AdminLogin from './components/Admin/AdminLogin';
+import AllSellers from './components/Admin/AllSellers';
+import SingleSeller from './components/Admin/SingleSeller';
 
 
 //Seller panel
@@ -50,6 +55,12 @@ function App() {
             <Route path="/following" element={<Following/>}/>
             <Route path="/favorites" element={<Favorites/>}/>
 
+            {/*Admin Routes*/}
+            <Route path='/admin/AllSellers' element={<AllSellers/>}/>
+            <Route path='/admin/SingleSeller' element={<SingleSeller/>}/>
+            <Route path='/admin/login' element={<AdminLogin/>}/>
+            <Route path="*" element={<Navigate replace to="/admin/login" />} />
+
             {/*Seller Routes*/}
             <Route path="/seller/register" element={<SellerRegister/>} />
             <Route path="/seller/login" element={<SellerLogin/>} />
@@ -63,6 +74,8 @@ function App() {
             <Route path='/seller/reports' element={<Reports/>}/>
             <Route path='/seller/profile' element={<SellerProfile/>}/>
             <Route path='/seller/seller-change-password' element={<SellerChangePassword/>}/>
+
+            
 
             {/*Customer Routes*/}
             <Route path='/customer/register' element={<Register/>}/>

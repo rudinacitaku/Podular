@@ -1,6 +1,9 @@
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from . import serializers
+from rest_framework_simplejwt.views import TokenObtainPairView
+from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
+from .serializers import AdminTokenObtainPairSerializer
 from rest_framework import generics, permissions, viewsets
 from . import models
 from django.db import IntegrityError
@@ -124,7 +127,7 @@ class PodcastImgsDetail(generics.ListCreateAPIView):
     queryset=models.PodcastImage.objects.all()
     serializer_class=serializers.PodcastImageSerializer
     
-     def get_queryset(self):
+    def get_queryset(self):
         qs=super().get_queryset()
         podcast_id=self.kwargs['podcast_id']
         qs=qs.filter(podcast_id=podcast_id)
@@ -167,4 +170,9 @@ def mark_default_address(request,pk):
             'bool':True
         }
     return JsonResponse(msg)
+
+
+
+class AdminTokenObtainPairView(TokenObtainPairView):
+    serializer_class = AdminTokenObtainPairSerializer
     

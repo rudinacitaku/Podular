@@ -9,7 +9,7 @@ router.register('address', views.CustomerAddressViewSet)
 
 urlpatterns = [
     #Creators
-    path('creators/', views.CreatorList.as_view()),
+    path('creator/', views.CreatorList.as_view()),
     path('creators/<int:pk>', views.CreatorDetails.as_view()),
     path('creators/register', creator_register, name='creator_register'),
     path('creators/login', views.creator_login, name='creator_login'),
