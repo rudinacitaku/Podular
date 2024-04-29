@@ -11,13 +11,28 @@ function SellerProducts(props) {
       }, []);
     
     
-      function fetchData(baseurl){
+    function fetchData(baseurl){
         fetch(baseurl)
         .then((response) => response.json())
         .then((data) => {
           setPodcastData(data.results);
         });
-      }
+    }
+
+    function showConfirm(podcast_id){
+        var _confirm=window.confirm('Are you sure you want to delete this product?');
+        if(_confirm){
+            fetch(baseurl+'podcast/'+podcast_id,{
+                method: 'DELETE'
+            })
+            .then((response) => {
+                if(response.status==204){
+                    fetchData(baseUrl+'podcasts/');
+                }
+            });
+        }
+    }
+
     return (
         <div className='container mt-4'>
             <div className='row'>
@@ -52,8 +67,8 @@ function SellerProducts(props) {
                                         <td>None</td>
                                         <td>
                                             <a href='#' className='btn btn-info'>View</a>
-                                            <a href='#' className='btn btn-primary ms-1'>Edit</a>
-                                            <a href='#' className='btn btn-danger ms-1'>Delete</a>
+                                            <Link href={'/seller/update-product/${podcast.id}'} className='btn btn-primary ms-1'>Edit</Link>
+                                            <Link href={'/seller/update-product/${podcast.id}'} onClick={()=>showConfirm(podcast.id)} className='btn btn-danger ms-1'>Delete</Link>
                                         </td>
                                     </tr>)
                                 }
