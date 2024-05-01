@@ -4,7 +4,7 @@ from . import serializers
 from rest_framework_simplejwt.views import TokenObtainPairView
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from .serializers import AdminTokenObtainPairSerializer
-from rest_framework import generics, permissions, viewsets
+from rest_framework import generics, permissions, viewsets, pagination
 from . import models
 from django.db import IntegrityError
 from django.contrib.auth.models import User 
@@ -179,6 +179,35 @@ def mark_default_address(request,pk):
 
 class AdminTokenObtainPairView(TokenObtainPairView):
     serializer_class = AdminTokenObtainPairSerializer
+
+#Vendor List API
+
+class VendorList(generics.ListCreateAPIView):
+    queryset = models.Vendor.objects.all()
+    serializer_class = serializers.VendorSerializer
+
+class VendorDetail(generics.RetrieveUpdateDestroyAPIView):
+    queryset = models.Vendor.objects.all()
+    serializer_class = serializers.VendorSerializer
+
+class ProductList(generics.ListCreateAPIView):
+   serializer_class=serializers.ProductListSerializer 
+   pagination_class=pagination.PageNumberPagination
+   queryset = models.Product.objects.all ()
+
+class ProductDetail (generics.RetrieveUpdateDestroyAPIView) :
+   serializer_class=serializers.ProductDetailSerializer 
+   queryset= models.Product.objects.all ()
+
+#Category List API
+class CategoryList(generics.ListCreateAPIView):
+   queryset = models.Product.objects.all ()
+   serializer_class=serializers.CategorySerializer 
+
+
+class CategoryDetail (generics.RetrieveUpdateDestroyAPIView) :
+   queryset= models.Product.objects.all ()
+   serializer_class=serializers.CategoryDetailSerializer
 
 #rating and reviews
 class ProductRatingViewSet(viewsets.ModelViewSet):

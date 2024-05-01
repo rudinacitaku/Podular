@@ -1,4 +1,4 @@
-from django.db import models
+from django.db import models 
 from django.contrib.auth.models import User
 
 
@@ -43,14 +43,34 @@ class CustomerAddress(models.Model):
 
     def __str__(self):
           return self.address
-      
-# Product Images Model
-class PodcastImage(models.Model):
-    podcast=models.ForeignKey(Podcast, on_delete=models.CASCADE,related_name='podcast_imgs')
-    image=models.ImageField(upload_to='podcast_imgs/',null=True)
     
+''' #Vendor 
+ class Vendor (models.Model):
+    user= models.ForeignKey(User, on_delete=models.CASCADE)     
+    address= models.TextField(null=True)
+
     def __str__(self):
-          return self.image.url
+        return self.user.username 
+'''
+
+#Product
+class Product(models.Model):
+    category=models.ForeignKey('ProductCategory',on_delete=models.SET_NULL,null=True, related_name='category_product')
+    vendor=models.ForeignKey('Vendor',on_delete=models.SET_NULL,null=True)
+    title=models.CharField(max_length=200)
+    detail=models.TextField(null=True)
+    price=models.FloatField()
+
+    def __str__(self):
+          return self.title
+    
+#Product Category
+class ProductCategory(models.Model):
+      title=models.CharField(max_length=200)
+      detail=models.TextField(null=True)
+
+      def __str__(self):
+          return self.title
 
 
 #Product Rating and Reviews 
@@ -63,3 +83,11 @@ class ProductRating(models.Model):
 
     def __str__(self):
           return self.reviews
+
+# Product Images Model
+class PodcastImage(models.Model):
+    podcast=models.ForeignKey(Podcast, on_delete=models.CASCADE,related_name='podcast_imgs')
+    image=models.ImageField(upload_to='podcast_imgs/',null=True)
+    
+    def __str__(self):
+          return self.image.url

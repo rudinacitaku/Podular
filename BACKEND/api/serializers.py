@@ -44,6 +44,7 @@ class PodcastDetailSerializer(serializers.ModelSerializer):
     def __init__ (self, *args, **kwargs):
         super(PodcastListSerializer, self).__init__(*args, **kwargs)
         self.Meta.depth = 1
+
 #Customer
 class CustomerSerializer(serializers.ModelSerializer):
     class Meta:
@@ -99,7 +100,44 @@ class AdminTokenObtainPairSerializer(TokenObtainPairSerializer):
             raise serializers.ValidationError('You must be a staff member to log in.')
         return data
 #Admin
+#Vendor 
+class VendorSerializer(serializers.ModelSerializer):
+    class Meta:
+        model=models.Vendor 
+        fields=['id','user', 'adress']  
 
+    def __init__ (self, *args, **kwargs):
+        super(VendorSerializer, self).__init__(*args, **kwargs)
+        #self.Meta.depth = 1
+
+class VendorDetailSerializer(serializers.ModelSerializer):
+    class Meta:
+        model=models.Vendor
+        fields=['id','user', 'adress']
+
+    def __init__ (self, *args, **kwargs):
+        super(VendorDetailSerializer, self).__init__(*args, **kwargs)
+        #self.Meta.depth = 1
+        
+#Products 
+class CategorySerializer(serializers.ModelSerializer):
+    class Meta:
+        model=models.ProductCategory 
+        fields=['id','title', 'detail']  
+
+    def __init__ (self, *args, **kwargs):
+        super(CategorySerializer, self).__init__(*args, **kwargs)
+        #self.Meta.depth = 1
+
+class CategoryDetailSerializer(serializers.ModelSerializer):
+    class Meta:
+        model=models.ProductCategory
+        fields=['id','title', 'detail']
+
+    def __init__ (self, *args, **kwargs):
+        super(CategoryDetailSerializer, self).__init__(*args, **kwargs)
+        #self.Meta.depth = 1
+        
 # Product Rating and Reviews 
 class ProductRatingSerializer(serializers.ModelSerializer):
     class Meta:
