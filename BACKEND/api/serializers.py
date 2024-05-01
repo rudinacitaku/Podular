@@ -99,3 +99,13 @@ class AdminTokenObtainPairSerializer(TokenObtainPairSerializer):
             raise serializers.ValidationError('You must be a staff member to log in.')
         return data
 #Admin
+
+# Product Rating and Reviews 
+class ProductRatingSerializer(serializers.ModelSerializer):
+    class Meta:
+        model=models.ProductRating
+        fields=['id', 'customer', 'product', 'rating','reviews','add_time']
+    
+    def __init__(self, *args, **kwargs):
+        super(CustomerAddressSerializer, self).__init__(*args, **kwargs)
+        self.Meta.depth = 1
