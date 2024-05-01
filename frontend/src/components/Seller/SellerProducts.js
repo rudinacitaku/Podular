@@ -11,8 +11,8 @@ function SellerProducts(props) {
       }, []);
     
     
-    function fetchData(baseurl){
-        fetch(baseurl)
+    function fetchData(baseUrl){
+        fetch(baseUrl)
         .then((response) => response.json())
         .then((data) => {
           setPodcastData(data.results);
@@ -22,7 +22,7 @@ function SellerProducts(props) {
     function showConfirm(podcast_id){
         var _confirm=window.confirm('Are you sure you want to delete this product?');
         if(_confirm){
-            fetch(baseurl+'podcast/'+podcast_id,{
+            fetch(baseUrl+'podcast/'+podcast_id,{
                 method: 'DELETE'
             })
             .then((response) => {
