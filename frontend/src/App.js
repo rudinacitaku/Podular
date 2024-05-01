@@ -39,6 +39,9 @@ import AddAddress from './components/Customer/AddAddress';
 import SellerChangePassword from './components/Seller/SellerChangePassword';
 import UpdateAddress from './components/Customer/UpdateAddress';
 import AddReview from './components/Customer/AddReview';
+import Wishlist from './components/Customer/Wishlist';
+import Profile from './components/Customer/Profile';
+import ChangePassword from './components/Customer/ChangePassword';
 
 
 function App() {
