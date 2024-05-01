@@ -7,6 +7,7 @@ admin.site.register(models.PodcastCategory)
 admin.site.register(models.Podcast)
 admin.site.register(models.Customer)
 admin.site.register(models.CustomerAddress)
+admin.site.register(models.ProductRating)
 
 #Podcast Image
 admin.site.register(models.PodcastImage)
