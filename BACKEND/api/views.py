@@ -179,4 +179,9 @@ def mark_default_address(request,pk):
 
 class AdminTokenObtainPairView(TokenObtainPairView):
     serializer_class = AdminTokenObtainPairSerializer
+
+#rating and reviews
+class ProductRatingViewSet(viewsets.ModelViewSet):
+    serializer_class=serializers.ProductRatingSerializer
+    queryset=models.ProductRating.objects.all()
     
