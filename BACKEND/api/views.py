@@ -180,37 +180,36 @@ def mark_default_address(request,pk):
 class AdminTokenObtainPairView(TokenObtainPairView):
     serializer_class = AdminTokenObtainPairSerializer
 
-#Vendor List API
-
-class VendorList(generics.ListCreateAPIView):
-    queryset = models.Vendor.objects.all()
-    serializer_class = serializers.VendorSerializer
-
-class VendorDetail(generics.RetrieveUpdateDestroyAPIView):
-    queryset = models.Vendor.objects.all()
-    serializer_class = serializers.VendorSerializer
-
-class ProductList(generics.ListCreateAPIView):
-   serializer_class=serializers.ProductListSerializer 
+class PodcastList(generics.ListCreateAPIView):
+   serializer_class=serializers.PodcastListSerializer 
    pagination_class=pagination.PageNumberPagination
-   queryset = models.Product.objects.all ()
+   queryset = models.Podcast.objects.all ()
 
-class ProductDetail (generics.RetrieveUpdateDestroyAPIView) :
-   serializer_class=serializers.ProductDetailSerializer 
-   queryset= models.Product.objects.all ()
+class PodcastDetail (generics.RetrieveUpdateDestroyAPIView) :
+   serializer_class=serializers.PodcastDetailSerializer 
+   queryset= models.Podcast.objects.all ()
 
 #Category List API
 class CategoryList(generics.ListCreateAPIView):
-   queryset = models.Product.objects.all ()
+   queryset = models.Podcast.objects.all ()
    serializer_class=serializers.CategorySerializer 
 
 
 class CategoryDetail (generics.RetrieveUpdateDestroyAPIView) :
-   queryset= models.Product.objects.all ()
+   queryset= models.Podcast.objects.all ()
    serializer_class=serializers.CategoryDetailSerializer
 
 #rating and reviews
-class ProductRatingViewSet(viewsets.ModelViewSet):
-    serializer_class=serializers.ProductRatingSerializer
-    queryset=models.ProductRating.objects.all()
+class PodcastRatingSerializer(serializers.CustomerSerializer):
+    class Meta:
+        model=models.PodcastRating
+        fields=['id', 'customer', 'product', 'rating','reviews','add_time']
+
+    def init(self, args, **kwargs):
+        super(CustomerAddressSerializer, self).init(args, **kwargs)
+        self.Meta.depth = 1
+
+class PodcastRatingViewSet(viewsets.ModelViewSet):
+    serializer_class=serializers.PodcastRatingSerializer
+    queryset=models.PodcastRating.objects.all()
     
