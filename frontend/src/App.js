@@ -38,6 +38,7 @@ import AddressList from './components/Customer/AddressList';
 import AddAddress from './components/Customer/AddAddress';
 import SellerChangePassword from './components/Seller/SellerChangePassword';
 import UpdateAddress from './components/Customer/UpdateAddress';
+import AddReview from './components/Customer/AddReview';
 
 
 function App() {
@@ -87,6 +88,7 @@ function App() {
             <Route path='/customer/wishlist' element={<Wishlist/>}/>
             <Route path='/customer/profile' element={<Profile/>}/>
             <Route path='/customer/change-password' element={<ChangePassword/>}/>
+            <Route path='/customer/add-review/:product_id' element={<AddReview/>}/>
 
 
           </Routes>

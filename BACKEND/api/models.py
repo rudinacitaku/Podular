@@ -44,15 +44,14 @@ class CustomerAddress(models.Model):
     def __str__(self):
           return self.address
     
-''' #Vendor 
+'''#Vendor 
  class Vendor (models.Model):
     user= models.ForeignKey(User, on_delete=models.CASCADE)     
     address= models.TextField(null=True)
 
     def __str__(self):
         return self.user.username 
-'''
-
+''' 
 #Product
 class Product(models.Model):
     category=models.ForeignKey('ProductCategory',on_delete=models.SET_NULL,null=True, related_name='category_product')
