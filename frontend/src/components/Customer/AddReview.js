@@ -1,4 +1,4 @@
-import Sidebar from './Sidebar';
+/*import Sidebar from './Sidebar';*/
 import { useState } from "react";
 import {useParams } from "react-router-dom"
 import axios from 'axios';
