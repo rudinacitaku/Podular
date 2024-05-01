@@ -199,17 +199,7 @@ class CategoryDetail (generics.RetrieveUpdateDestroyAPIView) :
    queryset= models.Podcast.objects.all ()
    serializer_class=serializers.CategoryDetailSerializer
 
-#rating and reviews
-class PodcastRatingSerializer(serializers.CustomerSerializer):
-    class Meta:
-        model=models.PodcastRating
-        fields=['id', 'customer', 'product', 'rating','reviews','add_time']
-
-    def init(self, args, **kwargs):
-        super(CustomerAddressSerializer, self).init(args, **kwargs)
-        self.Meta.depth = 1
 
 class PodcastRatingViewSet(viewsets.ModelViewSet):
     serializer_class=serializers.PodcastRatingSerializer
     queryset=models.PodcastRating.objects.all()
-    

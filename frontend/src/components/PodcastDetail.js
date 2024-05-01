@@ -68,3 +68,5 @@ function PodcastDetail(){
         </section>
     )
 }
+
+export default PodcastDetail;

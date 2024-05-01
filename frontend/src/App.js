@@ -15,7 +15,6 @@ import AdminLogin from './components/Admin/AdminLogin';
 import AllSellers from './components/Admin/AllSellers';
 import SingleSeller from './components/Admin/SingleSeller';
 
-
 //Seller panel
 import SellerRegister from './components/Seller/SellerRegister';
 import SellerLogin from './components/Seller/SellerLogin';
@@ -64,6 +63,7 @@ function App() {
             <Route path='/admin/SingleSeller' element={<SingleSeller/>}/>
             <Route path='/admin/login' element={<AdminLogin/>}/>
             <Route path="*" element={<Navigate replace to="/admin/login" />} />
+            
 
             {/*Seller Routes*/}
             <Route path="/seller/register" element={<SellerRegister/>} />
@@ -78,9 +78,7 @@ function App() {
             <Route path='/seller/reports' element={<Reports/>}/>
             <Route path='/seller/profile' element={<SellerProfile/>}/>
             <Route path='/seller/seller-change-password' element={<SellerChangePassword/>}/>
-
             
-
             {/*Customer Routes*/}
             <Route path='/customer/register' element={<Register/>}/>
             <Route path='/customer/login' element={<Login/>}/>
