@@ -64,7 +64,7 @@ function AddReview(){
                             {SuccessMsg && <p className="alert alert-success">{SuccessMsg}</p>}
                             <div className="mb-3">
                                 <label htmlFor="address" className="form-label">Review</label>
-                                <textarea className="form-control" name="reviews" onChange={inputHandler} value={ReviewFormDataFormData.rating} id="address"></textarea>
+                                <textarea className="form-control" name="reviews" onChange={inputHandler} value={ReviewFormDataFormData.reviews} id="reviews"></textarea>
                             </div>
                             <div className="mb-3">
                             <label htmlFor="address" className="form-label">Rating</label>

@@ -118,7 +118,7 @@ class VendorDetailSerializer(serializers.ModelSerializer):
     def __init__ (self, *args, **kwargs):
         super(VendorDetailSerializer, self).__init__(*args, **kwargs)
         #self.Meta.depth = 1
-        
+
 #Products 
 class CategorySerializer(serializers.ModelSerializer):
     class Meta:
@@ -146,4 +146,4 @@ class ProductRatingSerializer(serializers.ModelSerializer):
     
     def __init__(self, *args, **kwargs):
         super(CustomerAddressSerializer, self).__init__(*args, **kwargs)
-        self.Meta.depth = 1
+        # self.Meta.depth = 1
