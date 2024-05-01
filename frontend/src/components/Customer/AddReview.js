@@ -5,7 +5,7 @@ import axios from 'axios';
 const baseUrl='http://127.0.0.1:8000/api';
 
 function AddReview(){
-    const {product_id} = useParams();
+    const {products_id} = useParams();
     var customer_id=localStorage.getItem('customer_id');
     const [ErrorMsg,setErrorMsg]=useState('');
     const [SuccessMsg,setSuccessMsg]=useState('');
@@ -23,7 +23,7 @@ function AddReview(){
         const formData=new FormData();
         formData.append('reviews',ReviewFormData.reviews);
         formData.append('rating',ReviewFormData.rating);
-        formData.append('costumer',costumer_id);
+        formData.append('customer',customer_id);
         formData.append('products',products_id);
 
 
@@ -64,7 +64,7 @@ function AddReview(){
                             {SuccessMsg && <p className="alert alert-success">{SuccessMsg}</p>}
                             <div className="mb-3">
                                 <label htmlFor="address" className="form-label">Review</label>
-                                <textarea className="form-control" name="reviews" onChange={inputHandler} value={ReviewFormDataFormData.reviews} id="reviews"></textarea>
+                                <textarea className="form-control" name="reviews" onChange={inputHandler} value={ReviewFormData.reviews} id="reviews"></textarea>
                             </div>
                             <div className="mb-3">
                             <label htmlFor="address" className="form-label">Rating</label>
