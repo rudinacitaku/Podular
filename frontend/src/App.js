@@ -37,6 +37,7 @@ import AddressList from './components/Customer/AddressList';
 import AddAddress from './components/Customer/AddAddress';
 import SellerChangePassword from './components/Seller/SellerChangePassword';
 import UpdateAddress from './components/Customer/UpdateAddress';
+import DeleteAddress from './components/Customer/DeleteAddress';
 import AddReview from './components/Customer/AddReview';
 import Wishlist from './components/Customer/Wishlist';
 import Profile from './components/Customer/Profile';
@@ -86,6 +87,7 @@ function App() {
             <Route path='/customer/addresses' element={<AddressList/>}/>
             <Route path='/customer/add-address' element={<AddAddress/>}/>
             <Route path='/customer/update-address/:address_id' element={<UpdateAddress/>}/>
+            <Route path='/customer/delete-address/:address_id' element={<DeleteAddress/>}/>
             <Route path='/customer/wishlist' element={<Wishlist/>}/>
             <Route path='/customer/profile' element={<Profile/>}/>
             <Route path='/customer/change-password' element={<ChangePassword/>}/>

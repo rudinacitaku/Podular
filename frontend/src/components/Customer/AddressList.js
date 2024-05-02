@@ -62,6 +62,7 @@ function AddressList(){
                                                     address.default_address && <span onClick={()=>DefaultAddressHandler(address.id)} role="button"><i className="far fa-check-circle text-secondary mb-2"/><br/></span>
                                                     }
                                                     <Link to={`/customer/update-address/${address.id}`}>{address.address}</Link>
+                                                    <Link to={`/customer/delete-address/${address.id}`}>{address.address}</Link>
                                                 </h6>
                                             </div>
                                         </div>
