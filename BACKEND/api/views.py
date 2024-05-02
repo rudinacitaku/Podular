@@ -9,6 +9,9 @@ from . import models
 from django.db import IntegrityError
 from django.contrib.auth.models import User 
 from django.contrib.auth import authenticate
+from django.http import JsonResponse
+from django.views.decorators.csrf import csrf_exempt
+from django.contrib.auth. import authenticate
 
 
 #Creators
@@ -145,6 +148,23 @@ class CustomerList(generics.ListCreateAPIView):
 class CustomerDetails(generics.RetrieveUpdateDestroyAPIView):
     queryset=models.Customer.objects.all()
     serializer_class=serializers.CustomerDetailSerializer
+@csrf_exempt
+def customer_login(request):
+    username=request.POST.get('username')
+    password=request.POST.get('password')
+    hpwd=make_password(password)
+    user=authenticate(username=username,password=password)
+    if user:
+        msg={
+            'bool':True,
+            'user':user.username
+        }
+        else:
+            msg={
+                'bool':False,
+                'msg':'Invalid Username/Password!'
+            }
+    response = JsonResponse(msg)
 
 class CustomerAddressViewSet(viewsets.ModelViewSet):
     serializer_class=serializers.CustomerAddressSerializer
