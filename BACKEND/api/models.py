@@ -46,6 +46,28 @@ class CustomerAddress(models.Model):
 
     def __str__(self):
           return self.address
+#Customer Model
+    class Customer(models.Model):
+        user=models.ForeignKey(User,on_delete=models.CASCADE)
+        mobile=models.PositiveBigIntegerField()
+
+        def__str__{self}:
+            return self.user.username
+#Subscription Model
+class Subscription(models.Model):
+    customer=models.ForeignKey(Customer,on_delete=models.CASCADE,)
+    subscription_time=models.DateTimeField(auto_now_add=True)
+    
+
+    #Subscription Items Model
+class Subscription(models.Model):
+    ubscription=models.ForeignKey(Customer,on_delete=models.CASCADE)
+    product=models.ForeignKey(Product,on_delete=models.CASCADE)
+
+    
+        def__str__{self}:
+            return self.product.title
+
     
 
 '''#Vendor 
