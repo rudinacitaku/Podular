@@ -157,7 +157,7 @@ class CustomerAddressList(generics.ListAPIView):
     def get_queryset(self):
         qs=super().get_queryset()
         customer_id=self.kwargs['pk']
-        qs=qs.filter(customer_id=customer_id).order_by('id')
+        qs=qs.filter(customer__id=customer_id).order_by('id')
         return qs
     
 @csrf_exempt
@@ -175,7 +175,17 @@ def mark_default_address(request,pk):
         }
     return JsonResponse(msg)
 
-
+def customer_dashboard(request,pk):
+    customer_id=pk
+    totalOrders=models.Order.objects.filter(customer__id=customer_id).count()
+    totalWishlist=models.Wishlist.objects.filter(customer__id=customer_id).count()
+    totalAddress=models.CustomerAddress.objects.filter(customer__id=customer_id).count()
+    msg={
+        'totalOrders':totalOrders,
+        'totalWishlist':totalWishlist,
+        'totalAddress':totalAddress,
+    }
+    return JsonResponse(msg)
 
 class AdminTokenObtainPairView(TokenObtainPairView):
     serializer_class = AdminTokenObtainPairSerializer

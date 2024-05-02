@@ -44,6 +44,7 @@ class CustomerAddress(models.Model):
     def __str__(self):
           return self.address
     
+
 '''#Vendor 
  class Vendor (models.Model):
     user= models.ForeignKey(User, on_delete=models.CASCADE)     

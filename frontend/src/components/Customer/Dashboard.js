@@ -1,18 +1,38 @@
-// import { Link } from 'react-router-dom';
+import Sidebar from "./Sidebar";
+import { useState, useEffect } from "react";
+import { Link } from 'react-router-dom';
+
 
 function Dashboard(props){
+    
+    const baseUrl='http://127.0.0.1:8000/api';
+    var customer_id=localStorage.getItem('customer_id');
+    const [CountList, setCountList]=useState({
+        'totalAddress':0,
+        'totalWishlist':0,
+        'totalOrders':0
+    });
+    
+    useEffect(() => {
+        fetchData(baseUrl+'/customer/dashboard/'+customer_id+'/');
+    },[]);
+    function fetchData(baseUrl){
+        fetch(baseUrl)
+        .then((response) => response.json())
+        .then((data) => {
+            setCountList({
+                'totalAddress':data.totalAddress,
+                'totalWishlist':data.totalWishlist,
+                'totalOrders':data.totalOrders
+            })
+        });
+    }
+
     return(
         <div className='container mt-4'>
             <div className='row'>
                 <div className='col-md-2 col-12 mb-2'>
-                    <div className="list-group">
-                        <a className="list-group-item list-group-item-action disabled text-success fw-bold" aria-disabled="true">Dashboard</a>
-                        <a href="#" className="list-group-item list-group-item-action">Profile Settings</a>
-                        <a href="#" className="list-group-item list-group-item-action">Following Podcasts</a>
-                        <a href="#" className="list-group-item list-group-item-action">Favorite Creators</a>
-                        <a href="#" className="list-group-item list-group-item-action">My Orders</a>
-                        <a href="#" className="list-group-item list-group-item-action text-danger">Logout</a>
-                    </div>
+                    <Sidebar />
                 </div>
                 <div className='col-md-9 col-12 mb-2'>
                     <div className='row'>
@@ -30,16 +50,16 @@ function Dashboard(props){
                         <div className='col-md-4 mb-2'>
                             <div className="card"> 
                                 <div className="card-body text-center">
-                                    <h4>Following Podcasts List</h4>
-                                    <h6><a href="#" className="text-success">000</a></h6>
+                                    <h4>My Addresses</h4>
+                                    <h6><Link to="/customer/addresses">{CountList.totalAddress}</Link></h6>
                                 </div>
                             </div>
                         </div>
                         <div className='col-md-4 mb-2'>
                             <div className="card"> 
                                 <div className="card-body text-center">
-                                    <h4>Favorite Creators List</h4>
-                                    <h6><a href="#" className="text-success">000</a></h6>
+                                    <h4>My WishList</h4>
+                                    <h6><Link to="/customer/wishlist">{CountList.totalWishlist}</Link></h6>
                                 </div>
                             </div>
                         </div>
@@ -47,7 +67,7 @@ function Dashboard(props){
                             <div className="card"> 
                                 <div className="card-body text-center">
                                         <h4>My Total Orders</h4>
-                                        <h6><a href="#" className="text-success">000</a></h6>
+                                        <h6><Link to="/customer/orders">{CountList.totalOrders}</Link></h6>
                                 </div>
                             </div>
                         </div>    

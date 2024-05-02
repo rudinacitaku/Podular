@@ -28,7 +28,8 @@ urlpatterns = [
     path('customers/<int:pk>', views.CustomerDetails.as_view()),
     path('customers/address-list/<int:pk>', views.CustomerAddressList.as_view()),
     path('mark-default-address/<int:pk>', views.mark_default_address,name='mark_default_address'),
-    
+    path('customer/dashboard/<int:pk>/', views.customer_dashboard, name='customer_dashboard'),
+
 ]
 
 urlpatterns+=router.urls
