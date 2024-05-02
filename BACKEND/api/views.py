@@ -9,7 +9,9 @@ from . import models
 from django.db import IntegrityError
 from django.contrib.auth.models import User 
 from django.contrib.auth import authenticate
-
+from .models import Creator
+from django.http import JsonResponse
+from django.shortcuts import get_object_or_404
 
 #Creators
 class CreatorList(generics.ListCreateAPIView):
@@ -19,6 +21,17 @@ class CreatorList(generics.ListCreateAPIView):
 class CreatorDetails(generics.RetrieveUpdateDestroyAPIView):
     queryset=models.Creator.objects.all()
     serializer_class=serializers.CreatorDetailSerializer
+    
+def creator_detail(request, id):
+    creator = get_object_or_404(Creator, pk=id)
+    return JsonResponse({
+        'id': creator.id,
+        'username': creator.user.username,
+        'address': creator.address
+        # add other fields as needed
+    })
+
+
 
 @csrf_exempt
 def creator_register(request):

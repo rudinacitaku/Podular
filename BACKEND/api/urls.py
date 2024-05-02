@@ -2,6 +2,7 @@ from django.urls import path
 from . import views
 from .views import creator_register
 from rest_framework import routers
+from .views import creator_detail
 
 
 router=routers.DefaultRouter()
@@ -11,6 +12,7 @@ router.register('podcastrating', views.PodcastRatingViewSet)
 urlpatterns = [
     #Creators
     path('creator/', views.CreatorList.as_view()),
+    path('creator/<int:id>/', creator_detail, name='creator-detail'),
     path('creators/<int:pk>', views.CreatorDetails.as_view()),
     path('creators/register', creator_register, name='creator_register'),
     path('creators/login', views.creator_login, name='creator_login'),
