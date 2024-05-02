@@ -1,7 +1,8 @@
 import Sidebar from "./Sidebar";
-import { useState, useEffect } from "react";
-import { useParams, useHistory } from 'react-router-dom';
+import { useState } from "react";
+import { useParams} from 'react-router-dom';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 const baseUrl = 'http://127.0.0.1:8000/api';
 
@@ -14,9 +15,9 @@ function DeleteAddress(){
     const [SuccessMsg, setSuccessMsg] = useState('');
 
     
-    const history = useHistory();
+    const navigate = useNavigate();
 
-    const DeleteAddress = () => {
+    const deleteAddress = () => {
         
         axios.delete(baseUrl+'/address/'+parseInt(address_id)+'/')
         .then((response) => {
@@ -25,7 +26,7 @@ function DeleteAddress(){
                 setSuccessMsg('Address deleted successfully');
                 setErrorMsg('');
             
-                history.push('/address');
+                navigate('/address');
             } else {
                 setSuccessMsg('');
                 setErrorMsg('Failed to delete address');
@@ -50,7 +51,7 @@ function DeleteAddress(){
                             {ErrorMsg && <p className="alert alert-danger">{ErrorMsg}</p>}
                             {SuccessMsg && <p className="alert alert-success">{SuccessMsg}</p>}
                             <p>Are you sure you want to delete this address?</p>
-                            <button type="button" onClick={DeleteAddress} className="btn btn-danger">Delete</button>
+                            <button type="button" onClick={deleteAddress} className="btn btn-danger">Delete</button>
                         </div>
                     </div>
                 </div>
