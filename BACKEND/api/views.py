@@ -177,7 +177,7 @@ class CustomerAddressList(generics.ListAPIView):
     def get_queryset(self):
         qs=super().get_queryset()
         customer_id=self.kwargs['pk']
-        qs=qs.filter(customer_id=customer_id).order_by('id')
+        qs=qs.filter(customer__id=customer_id).order_by('id')
         return qs
     
 @csrf_exempt
@@ -195,42 +195,41 @@ def mark_default_address(request,pk):
         }
     return JsonResponse(msg)
 
-
+def customer_dashboard(request,pk):
+    customer_id=pk
+    totalOrders=models.Order.objects.filter(customer__id=customer_id).count()
+    totalWishlist=models.Wishlist.objects.filter(customer__id=customer_id).count()
+    totalAddress=models.CustomerAddress.objects.filter(customer__id=customer_id).count()
+    msg={
+        'totalOrders':totalOrders,
+        'totalWishlist':totalWishlist,
+        'totalAddress':totalAddress,
+    }
+    return JsonResponse(msg)
 
 class AdminTokenObtainPairView(TokenObtainPairView):
     serializer_class = AdminTokenObtainPairSerializer
 
-#Vendor List API
-
-class VendorList(generics.ListCreateAPIView):
-    queryset = models.Vendor.objects.all()
-    serializer_class = serializers.VendorSerializer
-
-class VendorDetail(generics.RetrieveUpdateDestroyAPIView):
-    queryset = models.Vendor.objects.all()
-    serializer_class = serializers.VendorSerializer
-
-class ProductList(generics.ListCreateAPIView):
-   serializer_class=serializers.ProductListSerializer 
+class PodcastList(generics.ListCreateAPIView):
+   serializer_class=serializers.PodcastListSerializer 
    pagination_class=pagination.PageNumberPagination
-   queryset = models.Product.objects.all ()
+   queryset = models.Podcast.objects.all ()
 
-class ProductDetail (generics.RetrieveUpdateDestroyAPIView) :
-   serializer_class=serializers.ProductDetailSerializer 
-   queryset= models.Product.objects.all ()
+class PodcastDetail (generics.RetrieveUpdateDestroyAPIView) :
+   serializer_class=serializers.PodcastDetailSerializer 
+   queryset= models.Podcast.objects.all ()
 
 #Category List API
 class CategoryList(generics.ListCreateAPIView):
-   queryset = models.Product.objects.all ()
+   queryset = models.Podcast.objects.all ()
    serializer_class=serializers.CategorySerializer 
 
 
 class CategoryDetail (generics.RetrieveUpdateDestroyAPIView) :
-   queryset= models.Product.objects.all ()
+   queryset= models.Podcast.objects.all ()
    serializer_class=serializers.CategoryDetailSerializer
 
-#rating and reviews
-class ProductRatingViewSet(viewsets.ModelViewSet):
-    serializer_class=serializers.ProductRatingSerializer
-    queryset=models.ProductRating.objects.all()
-    
+
+class PodcastRatingViewSet(viewsets.ModelViewSet):
+    serializer_class=serializers.PodcastRatingSerializer
+    queryset=models.PodcastRating.objects.all()

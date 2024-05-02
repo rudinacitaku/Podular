@@ -1,4 +1,4 @@
-//import Sidebar from './Sidebar';
+import Sidebar from './Sidebar';
 import { useState, useEffect } from "react";
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
@@ -62,7 +62,7 @@ function UpdateAddress(){
         <div className="container mt-4">
             <div className="row">
                 <div className="col-md-3 col-12 mb-2">
-                    {/*Sidebar*/}
+                    <Sidebar />
                 </div>
                 <div className="col-md-9 col-12 mb-2">
                     <div className="card">

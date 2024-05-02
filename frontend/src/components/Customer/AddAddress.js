@@ -1,4 +1,4 @@
-//import Sidebar from './Sidebar';
+import Sidebar from './Sidebar';
 import { useState } from "react";
 import axios from 'axios';
 const baseUrl='http://127.0.0.1:8000/api';
@@ -22,8 +22,8 @@ function AddAddress(){
         formData.append('address',AddressFormData.address);
         formData.append('customer',AddressFormData.customer);
 
-        axios.put(baseUrl+'/address/',formData)
-        .then(function(response){
+        axios.post(baseUrl+'/address/',formData)
+        .then(function (response){
             if(response.status!=201){
                 setErrorMsg('Data not saved');
                 setSuccessMsg('');
@@ -37,7 +37,7 @@ function AddAddress(){
             }
            
         })
-        .catch(function(error){
+        .catch(function (error){
             console.log(error);
         });
     };
@@ -48,7 +48,7 @@ function AddAddress(){
         <div className="container mt-4">
             <div className="row">
                 <div className="col-md-3 col-12 mb-2">
-                    {/*Sidebar*/}
+                    <Sidebar />
                 </div>
                 <div className="col-md-9 col-12 mb-2">
                     <div className="card">

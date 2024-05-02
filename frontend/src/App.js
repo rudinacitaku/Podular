@@ -15,7 +15,6 @@ import AdminLogin from './components/Admin/AdminLogin';
 import AllSellers from './components/Admin/AllSellers';
 import SingleSeller from './components/Admin/SingleSeller';
 
-
 //Seller panel
 import SellerRegister from './components/Seller/SellerRegister';
 import SellerLogin from './components/Seller/SellerLogin';
@@ -38,6 +37,7 @@ import AddressList from './components/Customer/AddressList';
 import AddAddress from './components/Customer/AddAddress';
 import SellerChangePassword from './components/Seller/SellerChangePassword';
 import UpdateAddress from './components/Customer/UpdateAddress';
+import DeleteAddress from './components/Customer/DeleteAddress';
 import AddReview from './components/Customer/AddReview';
 import Wishlist from './components/Customer/Wishlist';
 import Profile from './components/Customer/Profile';
@@ -64,6 +64,7 @@ function App() {
             <Route path='/admin/SingleSeller' element={<SingleSeller/>}/>
             <Route path='/admin/login' element={<AdminLogin/>}/>
             <Route path="*" element={<Navigate replace to="/admin/login" />} />
+            
 
             {/*Seller Routes*/}
             <Route path="/seller/register" element={<SellerRegister/>} />
@@ -78,9 +79,7 @@ function App() {
             <Route path='/seller/reports' element={<Reports/>}/>
             <Route path='/seller/profile' element={<SellerProfile/>}/>
             <Route path='/seller/seller-change-password' element={<SellerChangePassword/>}/>
-
             
-
             {/*Customer Routes*/}
             <Route path='/customer/register' element={<Register/>}/>
             <Route path='/customer/login' element={<Login/>}/>
@@ -88,6 +87,7 @@ function App() {
             <Route path='/customer/addresses' element={<AddressList/>}/>
             <Route path='/customer/add-address' element={<AddAddress/>}/>
             <Route path='/customer/update-address/:address_id' element={<UpdateAddress/>}/>
+            <Route path='/customer/delete-address/:address_id' element={<DeleteAddress/>}/>
             <Route path='/customer/wishlist' element={<Wishlist/>}/>
             <Route path='/customer/profile' element={<Profile/>}/>
             <Route path='/customer/change-password' element={<ChangePassword/>}/>

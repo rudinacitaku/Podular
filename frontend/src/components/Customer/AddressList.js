@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-//import Sidebar from './Sidebar';
+import Sidebar from './Sidebar';
 import { useEffect, useState } from "react";
 import axios from "axios";
 const baseUrl='http://127.0.0.1:8000/api';
@@ -40,7 +40,7 @@ function AddressList(){
         <div className="container mt-4">
             <div className="row">
                 <div className="col-md-3 col-12 mb-2">
-                    {/*Sidebar*/}
+                    <Sidebar />
                 </div>
                 <div className="col-md-9 col-12 mb-2">
                     <div className="row">
@@ -62,6 +62,7 @@ function AddressList(){
                                                     address.default_address && <span onClick={()=>DefaultAddressHandler(address.id)} role="button"><i className="far fa-check-circle text-secondary mb-2"/><br/></span>
                                                     }
                                                     <Link to={`/customer/update-address/${address.id}`}>{address.address}</Link>
+                                                    <Link to={`/customer/delete-address/${address.id}`}>{address.address}</Link>
                                                 </h6>
                                             </div>
                                         </div>

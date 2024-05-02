@@ -100,29 +100,11 @@ class AdminTokenObtainPairSerializer(TokenObtainPairSerializer):
             raise serializers.ValidationError('You must be a staff member to log in.')
         return data
 #Admin
-#Vendor 
-class VendorSerializer(serializers.ModelSerializer):
-    class Meta:
-        model=models.Vendor 
-        fields=['id','user', 'adress']  
-
-    def __init__ (self, *args, **kwargs):
-        super(VendorSerializer, self).__init__(*args, **kwargs)
-        #self.Meta.depth = 1
-
-class VendorDetailSerializer(serializers.ModelSerializer):
-    class Meta:
-        model=models.Vendor
-        fields=['id','user', 'adress']
-
-    def __init__ (self, *args, **kwargs):
-        super(VendorDetailSerializer, self).__init__(*args, **kwargs)
-        #self.Meta.depth = 1
 
 #Products 
 class CategorySerializer(serializers.ModelSerializer):
     class Meta:
-        model=models.ProductCategory 
+        model=models.PodcastCategory 
         fields=['id','title', 'detail']  
 
     def __init__ (self, *args, **kwargs):
@@ -131,7 +113,7 @@ class CategorySerializer(serializers.ModelSerializer):
 
 class CategoryDetailSerializer(serializers.ModelSerializer):
     class Meta:
-        model=models.ProductCategory
+        model=models.PodcastCategory
         fields=['id','title', 'detail']
 
     def __init__ (self, *args, **kwargs):
@@ -139,11 +121,21 @@ class CategoryDetailSerializer(serializers.ModelSerializer):
         #self.Meta.depth = 1
         
 # Product Rating and Reviews 
-class ProductRatingSerializer(serializers.ModelSerializer):
+class PodcastRatingSerializer(serializers.ModelSerializer):
     class Meta:
-        model=models.ProductRating
+        model=models.PodcastRating
         fields=['id', 'customer', 'product', 'rating','reviews','add_time']
     
     def __init__(self, *args, **kwargs):
         super(CustomerAddressSerializer, self).__init__(*args, **kwargs)
         # self.Meta.depth = 1
+
+
+    class PodcastRatingSerializer(serializers.ModelSerializer):
+        class Meta:
+            model=models.PodcastRating
+            fields=['id', 'customer', 'product', 'rating','reviews','add_time']
+
+    def init(self, args, **kwargs):
+        super(CustomerAddressSerializer, self).init(args, **kwargs)
+        self.Meta.depth = 1
