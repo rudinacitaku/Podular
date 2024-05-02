@@ -4,6 +4,7 @@ from django.contrib.auth.models import User
 
 # Creator Model
 class Creator (models.Model):
+    id=models.AutoField(primary_key=True)
     user=models.ForeignKey(User,on_delete=models.CASCADE)
     mobile=models.PositiveBigIntegerField(unique=True, null=True)
     address=models.TextField(null=True)
@@ -11,6 +12,8 @@ class Creator (models.Model):
 
     def __str__ (self):
             return self.user.username
+    
+    
 #Category
 class PodcastCategory (models.Model):
         title=models.CharField(max_length=200)
