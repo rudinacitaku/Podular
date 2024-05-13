@@ -9,9 +9,12 @@ from . import models
 from django.db import IntegrityError
 from django.contrib.auth.models import User 
 from django.contrib.auth import authenticate
+from django.http import JsonResponse
+from django.views.decorators.csrf import csrf_exempt
 from .models import Creator
 from django.http import JsonResponse
 from django.shortcuts import get_object_or_404
+
 
 #Creators
 class CreatorList(generics.ListCreateAPIView):
@@ -158,6 +161,23 @@ class CustomerList(generics.ListCreateAPIView):
 class CustomerDetails(generics.RetrieveUpdateDestroyAPIView):
     queryset=models.Customer.objects.all()
     serializer_class=serializers.CustomerDetailSerializer
+@csrf_exempt
+def customer_login(request):
+    username=request.POST.get('username')
+    password=request.POST.get('password')
+    hpwd=make_password(password)
+    user=authenticate(username=username,password=password)
+    if user:
+        msg={
+            'bool':True,
+            'user':user.username
+        }
+        else:
+            msg={
+                'bool':False,
+                'msg':'Invalid Username/Password!'
+            }
+    response = JsonResponse(msg)
 
 class CustomerAddressViewSet(viewsets.ModelViewSet):
     serializer_class=serializers.CustomerAddressSerializer
@@ -170,7 +190,7 @@ class CustomerAddressList(generics.ListAPIView):
     def get_queryset(self):
         qs=super().get_queryset()
         customer_id=self.kwargs['pk']
-        qs=qs.filter(customer_id=customer_id).order_by('id')
+        qs=qs.filter(customer__id=customer_id).order_by('id')
         return qs
     
 @csrf_exempt
@@ -188,7 +208,17 @@ def mark_default_address(request,pk):
         }
     return JsonResponse(msg)
 
-
+def customer_dashboard(request,pk):
+    customer_id=pk
+    totalOrders=models.Order.objects.filter(customer__id=customer_id).count()
+    totalWishlist=models.Wishlist.objects.filter(customer__id=customer_id).count()
+    totalAddress=models.CustomerAddress.objects.filter(customer__id=customer_id).count()
+    msg={
+        'totalOrders':totalOrders,
+        'totalWishlist':totalWishlist,
+        'totalAddress':totalAddress,
+    }
+    return JsonResponse(msg)
 
 class AdminTokenObtainPairView(TokenObtainPairView):
     serializer_class = AdminTokenObtainPairSerializer
