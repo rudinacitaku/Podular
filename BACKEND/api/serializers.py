@@ -27,21 +27,21 @@ class PodcastImageSerializer(serializers.ModelSerializer):
         fields=['id','podcast', 'image']
 
 class PodcastListSerializer(serializers.ModelSerializer):
-    product_ratings=serializers.StringRelatedField(many=True, read_only=True)
+    podcast_ratings=serializers.StringRelatedField(many=True, read_only=True)
     podcast_imgs=PodcastImageSerializer(many=True, read_only=True)
     class Meta:
         model=models.Podcast
-        fields=['id','category','creator', 'title','detail','product_ratings','image']
+        fields=['id','category','creator', 'title','detail','podcast_ratings','image']
 
     def __init__ (self, *args, **kwargs):
         super(PodcastListSerializer, self).__init__(*args, **kwargs)
         #    self.Meta.depth = 1
         
 class PodcastDetailSerializer(serializers.ModelSerializer):
-    product_ratings=serializers.StringRelatedField(many=True, read_only=True)
+    podcast_ratings=serializers.StringRelatedField(many=True, read_only=True)
     class Meta:
         model=models.Podcast
-        fields=['id','category','creator','title', 'detail', 'product_ratings']
+        fields=['id','category','creator','title', 'detail', 'podcast_ratings']
 
     def __init__ (self, *args, **kwargs):
         super(PodcastListSerializer, self).__init__(*args, **kwargs)
@@ -140,7 +140,7 @@ class CategoryDetailSerializer(serializers.ModelSerializer):
         super(CategoryDetailSerializer, self).__init__(*args, **kwargs)
         #self.Meta.depth = 1
         
-# Product Rating and Reviews 
+# Podcast Rating and Reviews 
 class PodcastRatingSerializer(serializers.ModelSerializer):
     class Meta:
         model=models.PodcastRating

@@ -5,7 +5,7 @@ import axios from 'axios';
 const baseUrl='http://127.0.0.1:8000/api';
 
 function AddReview(){
-    const {products_id} = useParams();
+    const {podcast_id} = useParams();
     var customer_id=localStorage.getItem('customer_id');
     const [ErrorMsg,setErrorMsg]=useState('');
     const [SuccessMsg,setSuccessMsg]=useState('');
@@ -24,10 +24,10 @@ function AddReview(){
         formData.append('reviews',ReviewFormData.reviews);
         formData.append('rating',ReviewFormData.rating);
         formData.append('customer',customer_id);
-        formData.append('products',products_id);
+        formData.append('podcast',podcast_id);
 
 
-        axios.put(baseUrl+'/productrating/',formData)
+        axios.put(baseUrl+'/podcastrating/',formData)
         .then(function(response){
             if(response.status!=201){
                 setErrorMsg('Data not saved');
