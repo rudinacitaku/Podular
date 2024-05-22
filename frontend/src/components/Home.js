@@ -3,27 +3,22 @@ import '@fortawesome/fontawesome-free/css/all.min.css';
 import { Link } from 'react-router-dom';
 import logo from './logo.svg';
 import SinglePodcast from './SinglePodcast';
-
+import { useState,useEffect } from 'react';
 
 function Home() {
-  const podcasts=[
-    {
-      'title':'Podcast 1',
-      'price':100
-    },
-    {
-      'title':'Podcast 2',
-      'price':100
-    },
-    {
-      'title':'Podcast 3',
-      'price':100
-    },
-    {
-      'title':'Podcast 4',
-      'price':100
-    },
-  ]
+  const baseUrl='http://127.0.0.1:8000/api';
+  const [podcasts,setPodcasts]=useState([]);
+
+    useEffect(()=> {
+      fetchData(baseUrl+'/podcasts/?fetch_limit=4');
+  },[]);
+  function fetchData(baseUrl){
+    fetch(baseUrl)
+    .then((response) => response.json())
+    .then((data) => {
+      setPodcasts(data.results);
+    });
+  }
   return (
     <>
    {/* Latest Podcasts */}
