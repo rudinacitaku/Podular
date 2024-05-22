@@ -9,7 +9,7 @@ function AddressList(){
     const [AddressList, setAddressList]=useState([]);
 
     useEffect(() => {
-        fetchData(baseUrl+'/customer/'+customer_id+'/address-list/');
+        fetchData(baseUrl+'/address');
     },[]);
     function fetchData(baseUrl){
         fetch(baseUrl)

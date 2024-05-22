@@ -32,12 +32,11 @@ function AddAddress(){
                 setSuccessMsg('Data saved');
                 setAddressFormData({
                     'address':'',
-
                 });
             }
            
         })
-        .catch(function (error){
+        .catch(function (error) {
             console.log(error);
         });
     };
