@@ -12,6 +12,7 @@ import Favorites from './components/Favorites';
 import Checkout from './components/Checkout';
 import OrderSuccess from './components/OrderSuccess';
 import OrderFailure from './components/OrderFailure';
+import CategoryPodcasts from './components/CategoryPodcasts';
 
 //Admin panel
 import AdminLogin from './components/Admin/AdminLogin';
@@ -69,6 +70,7 @@ function App() {
             <Route path='/checkout' element={<Checkout/>}/>
             <Route path='/order/success' element={<OrderSuccess/>}/>
             <Route path='/order/failure' element={<OrderFailure/>}/>
+            <Route path='/categorypage' element={<CategoryPodcasts/>}/>
 
             {/*Admin Routes*/}
             <Route path='/admin/AllSellers' element={<AllSellers/>}/>

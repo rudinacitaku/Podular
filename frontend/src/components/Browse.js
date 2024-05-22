@@ -103,7 +103,7 @@ function Browse() {
       {/* Popular Categories */}
       <main className='mt-4'>
         <div className='container'>
-          <h3 className='mb-4'>Popular Categories <a href='#' className='float-end btn btn-dark'>View All Categories <i className="fas fa-arrow-right"></i></a></h3>
+          <h3 className='mb-4'>Categories <a href='#' className='float-end btn btn-dark'>View All Categories <i className="fas fa-arrow-right"></i></a></h3>
         </div>
       </main>
       
