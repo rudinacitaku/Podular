@@ -14,6 +14,7 @@ import OrderSuccess from './components/OrderSuccess';
 import OrderFailure from './components/OrderFailure';
 import AllPodcasts from './components/AllPodcasts';
 import Footer from './components/Footer';
+import CategoryPodcasts from './components/CategoryPodcasts';
 
 //Admin panel
 import AdminLogin from './components/Admin/AdminLogin';
@@ -73,6 +74,7 @@ function App() {
             <Route path='/order/failure' element={<OrderFailure/>}/>
             <Route path='/allpodcasts' element={<AllPodcasts/>}/>
             <Route path='/footer' element={<Footer/>}/>
+            <Route path='/categorypage' element={<CategoryPodcasts/>}/>
 
             {/*Admin Routes*/}
             <Route path='/admin/AllSellers' element={<AllSellers/>}/>

@@ -7,8 +7,8 @@ import SinglePodcast from './SinglePodcast';
 
 function Browse() {
   return (
-    <div>Browser</div>
-  )
+      <div><p>browse</p></div>
+        );
 }
 
 export default Browse;
