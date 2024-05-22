@@ -47,14 +47,6 @@ class CustomerAddress(models.Model):
 
     def __str__(self):
           return self.address
-    
-#Customer Model
-    class Customer(models.Model):
-        user=models.ForeignKey(User,on_delete=models.CASCADE)
-        mobile=models.PositiveBigIntegerField()
-
-        def __str__ (self):
-            return self.user.username
 
  # Podcast Rating and Reviews 
 class PodcastRating(models.Model):
