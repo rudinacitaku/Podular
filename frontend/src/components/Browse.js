@@ -24,6 +24,10 @@ function Browse() {
       'price':100
     },
   ]
+
+  fetch ('http://127.0.0.1:8000/api/podcasts/')
+  .then((response)=>response.json())
+  .then((data)=>console.log(data));
   return (
     <>
       {/* Latest Podcasts */}
