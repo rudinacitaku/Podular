@@ -80,3 +80,28 @@
   font-size: 1em; /* Adjust font size as needed */
   z-index: 1;
 }
+.all-sellers .card-deck {
+  justify-content: center;
+}
+.all-sellers .card-deck .card {
+  width: 20rem; /* Make cards narrower */
+}
+.pagination-buttons {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+.pagination-buttons .page-button {
+  padding: 10px 20px; /* Increase padding for better touch area */
+  background-color: #007bff; /* Example blue background */
+  color: white; /* Text color */
+  border: none;
+  border-radius: 5px; /* Rounded corners */
+  cursor: pointer;
+}
+
+.pagination-buttons .page-button:hover {
+  background-color: #0056b3; /* Darker blue on hover */
+}
+

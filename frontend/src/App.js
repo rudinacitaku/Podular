@@ -17,6 +17,8 @@ import OrderFailure from './components/OrderFailure';
 import AdminLogin from './components/Admin/AdminLogin';
 import AllSellers from './components/Admin/AllSellers';
 import SingleSeller from './components/Admin/SingleSeller';
+import SellerDetails from './components/Admin/SellerDetails';
+import EditSeller from './components/Admin/EditSeller';
 
 //Seller panel
 import SellerRegister from './components/Seller/SellerRegister';
@@ -73,7 +75,8 @@ function App() {
             <Route path='/admin/SingleSeller' element={<SingleSeller/>}/>
             <Route path='/admin/login' element={<AdminLogin/>}/>
             <Route path="*" element={<Navigate replace to="/admin/login" />} />
-            
+            <Route path='/seller/:id' element={<SellerDetails/>}/>
+            <Route path="/seller/edit/:id" component={<EditSeller/>} />
 
             {/*Seller Routes*/}
             <Route path="/seller/register" element={<SellerRegister/>} />
