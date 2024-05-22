@@ -27,19 +27,21 @@ class PodcastImageSerializer(serializers.ModelSerializer):
         fields=['id','podcast', 'image']
 
 class PodcastListSerializer(serializers.ModelSerializer):
+    product_ratings=serializers.StringRelatedField(many=True, read_only=True)
     podcast_imgs=PodcastImageSerializer(many=True, read_only=True)
     class Meta:
         model=models.Podcast
-        fields=['id','category','title', 'detail','vendor','price','image']
+        fields=['id','category','creator', 'title','detail','product_ratings','image']
 
     def __init__ (self, *args, **kwargs):
         super(PodcastListSerializer, self).__init__(*args, **kwargs)
         #    self.Meta.depth = 1
         
 class PodcastDetailSerializer(serializers.ModelSerializer):
+    product_ratings=serializers.StringRelatedField(many=True, read_only=True)
     class Meta:
         model=models.Podcast
-        fields=['id','title', 'detail']
+        fields=['id','category','creator','title', 'detail', 'product_ratings']
 
     def __init__ (self, *args, **kwargs):
         super(PodcastListSerializer, self).__init__(*args, **kwargs)
@@ -64,7 +66,25 @@ class CustomerDetailSerializer(serializers.ModelSerializer):
         super(CustomerDetailSerializer, self).__init__(*args, **kwargs)
         self.Meta.depth = 1
  
-#Order
+#Subscription
+class SubscriptionSerializer(serializers.ModelSerializer):
+    class Meta:
+        model=models.Subscription
+        fields=['id','user'] 
+
+    def __init__ (self, *args, **kwargs):
+        super(SubscriptionSerializer, self).__init__(*args, **kwargs)
+        self.Meta.depth = 1
+
+class SubscriptionPodcastsSerializer(serializers.ModelSerializer):
+    class Meta:
+        model=models.SubscriptionPodcasts
+        fields=['id','subscription', 'user'] 
+
+    def __init__ (self, *args, **kwargs):
+        super(SubscriptionPodcastsSerializer, self).__init__(*args, **kwargs)
+        self.Meta.depth = 1
+
 
 #Customer Address
 class CustomerAddressSerializer(serializers.ModelSerializer):
@@ -101,7 +121,7 @@ class AdminTokenObtainPairSerializer(TokenObtainPairSerializer):
         return data
 #Admin
 
-#Products 
+#Podcast Categories
 class CategorySerializer(serializers.ModelSerializer):
     class Meta:
         model=models.PodcastCategory 
@@ -124,18 +144,8 @@ class CategoryDetailSerializer(serializers.ModelSerializer):
 class PodcastRatingSerializer(serializers.ModelSerializer):
     class Meta:
         model=models.PodcastRating
-        fields=['id', 'customer', 'product', 'rating','reviews','add_time']
+        fields=['id', 'customer', 'podcast', 'rating','reviews','add_time']
     
     def __init__(self, *args, **kwargs):
-        super(CustomerAddressSerializer, self).__init__(*args, **kwargs)
-        # self.Meta.depth = 1
-
-
-    class PodcastRatingSerializer(serializers.ModelSerializer):
-        class Meta:
-            model=models.PodcastRating
-            fields=['id', 'customer', 'product', 'rating','reviews','add_time']
-
-    def init(self, args, **kwargs):
-        super(CustomerAddressSerializer, self).init(args, **kwargs)
-        self.Meta.depth = 1
+        super(PodcastRatingSerializer, self).__init__(*args, **kwargs)
+        #self.Meta.depth = 1

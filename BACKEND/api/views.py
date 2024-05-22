@@ -11,8 +11,8 @@ from django.contrib.auth.models import User
 from django.contrib.auth import authenticate
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
-from django.contrib.auth. import authenticate
-
+from django.contrib.auth import authenticate
+from django.contrib.auth.models import User
 
 #Creators
 class CreatorList(generics.ListCreateAPIView):
@@ -117,11 +117,16 @@ def creator_login(request):
 class PodcastList(generics.ListCreateAPIView):
     queryset=models.Podcast.objects.all()
     serializer_class=serializers.PodcastListSerializer
+    pagination_class=pagination.PageNumberPagination
 
-class PodcastDetails(generics.RetrieveUpdateDestroyAPIView):
+class PodcastDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset=models.Podcast.objects.all()
     serializer_class=serializers.PodcastDetailSerializer
-    
+
+class PodcastRatingViewSet(viewsets.ModelViewSet):
+    serializer_class=serializers.PodcastRatingSerializer
+    queryset=models.PodcastRating.objects.all() 
+   
 class PodcastImgsList(generics.ListCreateAPIView):
     queryset=models.PodcastImage.objects.all()
     serializer_class=serializers.PodcastImageSerializer
@@ -145,26 +150,60 @@ class CustomerList(generics.ListCreateAPIView):
     queryset=models.Customer.objects.all()
     serializer_class=serializers.CustomerSerializer
 
-class CustomerDetails(generics.RetrieveUpdateDestroyAPIView):
+class CustomerDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset=models.Customer.objects.all()
     serializer_class=serializers.CustomerDetailSerializer
+
 @csrf_exempt
 def customer_login(request):
     username=request.POST.get('username')
     password=request.POST.get('password')
-    hpwd=make_password(password)
     user=authenticate(username=username,password=password)
     if user:
         msg={
             'bool':True,
             'user':user.username
         }
-        else:
+    else:
             msg={
                 'bool':False,
                 'msg':'Invalid Username/Password!'
             }
-    response = JsonResponse(msg)
+    return JsonResponse(msg)
+
+@csrf_exempt
+def customer_register(request):
+    first_name=request.POST.get('first_name')
+    last_name=request.POST.get('last_name')
+    email=request.POST.get('email')
+    mobile=request.POST.get('mobile')
+    username=request.POST.get('username')
+    password=request.POST.get('password')
+    user=User.objects.create(
+        first_name=first_name, 
+        last_name=last_name,
+        email=email,
+        mobile=mobile,
+        username=username,
+        password=password,
+    )
+    if user:
+        customer=models.Customer.objects.create(
+            user=user,
+            mobile=mobile
+        )
+        msg={
+            'bool':True,
+            'user':user.id,
+            'customer':customer.id,
+            'msg': 'Thank you for your registration! You can login now.'
+        }
+    else:
+            msg={
+                'bool':False,
+                'msg':'Invalid data!',
+            }
+    return JsonResponse(msg)
 
 class CustomerAddressViewSet(viewsets.ModelViewSet):
     serializer_class=serializers.CustomerAddressSerializer
@@ -210,26 +249,30 @@ def customer_dashboard(request,pk):
 class AdminTokenObtainPairView(TokenObtainPairView):
     serializer_class = AdminTokenObtainPairSerializer
 
-class PodcastList(generics.ListCreateAPIView):
-   serializer_class=serializers.PodcastListSerializer 
-   pagination_class=pagination.PageNumberPagination
-   queryset = models.Podcast.objects.all ()
+#Subscriptions
+class SubscriptionPodcastsList(generics.ListCreateAPIView):
+    queryset=models.SubscriptionPodcasts.objects.all()
+    serializer_class=serializers.SubscriptionPodcastsSerializer
 
-class PodcastDetail (generics.RetrieveUpdateDestroyAPIView) :
-   serializer_class=serializers.PodcastDetailSerializer 
-   queryset= models.Podcast.objects.all ()
+class SubscriptionPodcasts(generics.ListAPIView):
+   # queryset=models.Subscription.objects.all()
+    serializer_class=serializers.SubscriptionPodcastsSerializer
+
+    def get_queryset(self):
+        subscription_id=self.kwargs['pk']
+        subscription=models.Subscription.objects.get(id=subscription_id)
+        subscription_podcasts=models.SubscriptionPodcasts.objects.filter(subscription=subscription)
+        return subscription_podcasts
 
 #Category List API
 class CategoryList(generics.ListCreateAPIView):
-   queryset = models.Podcast.objects.all ()
+   queryset = models.PodcastCategory.objects.all()
    serializer_class=serializers.CategorySerializer 
 
 
-class CategoryDetail (generics.RetrieveUpdateDestroyAPIView) :
-   queryset= models.Podcast.objects.all ()
+class CategoryDetail(generics.RetrieveUpdateDestroyAPIView):
+   queryset= models.PodcastCategory.objects.all()
    serializer_class=serializers.CategoryDetailSerializer
 
 
-class PodcastRatingViewSet(viewsets.ModelViewSet):
-    serializer_class=serializers.PodcastRatingSerializer
-    queryset=models.PodcastRating.objects.all()
+

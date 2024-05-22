@@ -14,22 +14,27 @@ urlpatterns = [
     path('creators/<int:pk>', views.CreatorDetails.as_view()),
     path('creators/register', creator_register, name='creator_register'),
     path('creators/login', views.creator_login, name='creator_login'),
-    #Product Categories 
+    #Podcast Categories 
     path('categories/', views.CategoryList.as_view()),
     path('category/<int:pk>', views.CategoryDetail.as_view()),
     #Podcasts
     path('podcasts/', views.PodcastList.as_view()),
-    path('podcast/<int:pk>', views.PodcastDetails.as_view()),
+    path('podcast/<int:pk>', views.PodcastDetail.as_view()),
     path('podcast-imgs/', views.PodcastImgsList.as_view()),
     path('podcast-imgs/<int:podcast_id>', views.PodcastImgsDetail.as_view()),
     path('podcast-img/<int:pk>', views.PodcastImgDetail.as_view()),
-    #customers
+    #Customers
     path('customers/', views.CustomerList.as_view()),
-    path('customers/<int:pk>', views.CustomerDetails.as_view()),
-    path('customers/login', views.customer_login,name='customer_login'),
+    path('customers/<int:pk>', views.CustomerDetail.as_view()),
+    path('customers/login/', views.customer_login,name='customer_login'),
+    path('customers/register/', views.customer_register,name='customer_register'),
     path('customers/address-list/<int:pk>', views.CustomerAddressList.as_view()),
     path('mark-default-address/<int:pk>', views.mark_default_address,name='mark_default_address'),
     path('customer/dashboard/<int:pk>/', views.customer_dashboard, name='customer_dashboard'),
+    #Subscriptions
+    path('subscriptions/', views.SubscriptionPodcastsList.as_view()),
+    path('subscriptions/<int:pk>', views.SubscriptionPodcastsList.as_view()),
+    
 
 ]
 

@@ -13,7 +13,6 @@ class Creator (models.Model):
     def __str__ (self):
             return self.user.username
     
-    
 #Category
 class PodcastCategory (models.Model):
         title=models.CharField(max_length=200)
@@ -24,6 +23,8 @@ class PodcastCategory (models.Model):
         
 #Podcast 
 class Podcast (models.Model):
+        category=models.ForeignKey(PodcastCategory, on_delete=models.SET_NULL, null=True, related_name='category_podcast')
+        creator=models.ForeignKey(Creator, on_delete=models.SET_NULL, null=True)
         title=models.CharField(max_length=200)
         detail=models.TextField(null=True)
 
@@ -46,29 +47,47 @@ class CustomerAddress(models.Model):
 
     def __str__(self):
           return self.address
+    
 #Customer Model
     class Customer(models.Model):
         user=models.ForeignKey(User,on_delete=models.CASCADE)
         mobile=models.PositiveBigIntegerField()
 
-        def__str__{self}:
+        def __str__ (self):
             return self.user.username
+
+ # Podcast Rating and Reviews 
+class PodcastRating(models.Model):
+    customer=models.ForeignKey(Customer,on_delete=models.CASCADE,related_name='rating_customers')
+    podcast=models.ForeignKey(Podcast,on_delete=models.CASCADE, related_name='podcast_ratings')
+    rating=models.IntegerField()
+    reviews=models.TextField()
+    add_time=models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+          return f'{self.rating} - {self.reviews}'
+
+# Podcast Images Model
+class PodcastImage(models.Model):
+    podcast=models.ForeignKey(Podcast,on_delete=models.CASCADE,related_name='podcast_img')
+    image=models.ImageField(upload_to='podcast_imgs/',null=True)
+    
+    def __str__(self):
+          return self.image.url
+           
 #Subscription Model
 class Subscription(models.Model):
     customer=models.ForeignKey(Customer,on_delete=models.CASCADE,)
     subscription_time=models.DateTimeField(auto_now_add=True)
     
+#Subscription Items Model
+class SubscriptionPodcasts(models.Model):
+    subscription=models.ForeignKey(Customer,on_delete=models.CASCADE, related_name='subscription_podcasts')
+    podcast=models.ForeignKey(Podcast,on_delete=models.CASCADE)
 
-    #Subscription Items Model
-class Subscription(models.Model):
-    ubscription=models.ForeignKey(Customer,on_delete=models.CASCADE)
-    product=models.ForeignKey(Product,on_delete=models.CASCADE)
+    def __str__(self):
+        return self.podcast.title
 
-    
-        def__str__{self}:
-            return self.product.title
-
-    
 
 '''#Vendor 
  class Vendor (models.Model):
@@ -78,41 +97,24 @@ class Subscription(models.Model):
     def __str__(self):
         return self.user.username 
 ''' 
-#Product
-#class Product(models.Model):
-  #  category=models.ForeignKey('ProductCategory',on_delete=models.SET_NULL,null=True, related_name='category_product')
-  #  vendor=models.ForeignKey('Vendor',on_delete=models.SET_NULL,null=True)
-   # title=models.CharField(max_length=200)
-   ## detail=models.TextField(null=True)
-   # price=models.FloatField()
+'''#Product
+class Product(models.Model):
+    category=models.ForeignKey('ProductCategory',on_delete=models.SET_NULL,null=True, related_name='category_product')
+    vendor=models.ForeignKey('Vendor',on_delete=models.SET_NULL,null=True)
+    title=models.CharField(max_length=200)
+    detail=models.TextField(null=True)
+    price=models.FloatField()
 
-   # def __str__(self):
-   #       return self.title
-    
-#Product Category
+    def __str__(self):
+        return self.title
+ '''   
+'''#Product Category
 #class PodcastCategory(models.Model):
    #   title=models.CharField(max_length=200)
       #detail=models.TextField(null=True)
 
       #def __str__(self):
       #    return self.title
+'''
 
 
-#Product Rating and Reviews 
-class PodcastRating(models.Model):
-    customer=models.ForeignKey(Customer,on_delete=models.CASCADE,related_name='rating_customers')
-    podcast=models.ForeignKey(Podcast,on_delete=models.CASCADE)
-    rating=models.IntegerField()
-    reviews=models.TextField()
-    add_time=models.DateTimeField(auto_now_add=True)
-
-    def __str__(self):
-          return self.reviews
-
-# Product Images Model
-class PodcastImage(models.Model):
-    podcast=models.ForeignKey(Podcast, on_delete=models.CASCADE,related_name='podcast_imgs')
-    image=models.ImageField(upload_to='podcast_imgs/',null=True)
-    
-    def __str__(self):
-          return self.image.url

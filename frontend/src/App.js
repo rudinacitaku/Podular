@@ -1,6 +1,7 @@
-
 import './App.css';
 import {Routes, Route, Navigate} from 'react-router-dom';
+import 'bootstrap/dist/css/bootstrap.min.css';
+
 import Home from './components/Home';
 import Browse from './components/Browse';
 import Create from './components/Create';
@@ -8,7 +9,9 @@ import Navbar from './components/NavBar';
 import Shop from './components/Shop';
 import Following from './components/Following';
 import Favorites from './components/Favorites';
-import 'bootstrap/dist/css/bootstrap.min.css';
+import Checkout from './components/Checkout';
+import OrderSuccess from './components/OrderSuccess';
+import OrderFailure from './components/OrderFailure';
 
 //Admin panel
 import AdminLogin from './components/Admin/AdminLogin';
@@ -32,6 +35,7 @@ import SellerProfile from './components/Seller/SellerProfile';
 //Customer panel
 import Register from './components/Customer/Register';
 import Login from './components/Customer/Login';
+import CustomerLogout from './components/Customer/CustomerLogout';
 import Dashboard from './components/Customer/Dashboard';
 import AddressList from './components/Customer/AddressList';
 import AddAddress from './components/Customer/AddAddress';
@@ -42,6 +46,8 @@ import AddReview from './components/Customer/AddReview';
 import Wishlist from './components/Customer/Wishlist';
 import Profile from './components/Customer/Profile';
 import ChangePassword from './components/Customer/ChangePassword';
+import Orders from './components/Customer/Orders';
+
 
 
 function App() {
@@ -58,6 +64,9 @@ function App() {
             <Route path="/shop" element={<Shop/>}/>
             <Route path="/following" element={<Following/>}/>
             <Route path="/favorites" element={<Favorites/>}/>
+            <Route path='/checkout' element={<Checkout/>}/>
+            <Route path='/order/success' element={<OrderSuccess/>}/>
+            <Route path='/order/failure' element={<OrderFailure/>}/>
 
             {/*Admin Routes*/}
             <Route path='/admin/AllSellers' element={<AllSellers/>}/>
@@ -83,6 +92,7 @@ function App() {
             {/*Customer Routes*/}
             <Route path='/customer/register' element={<Register/>}/>
             <Route path='/customer/login' element={<Login/>}/>
+            <Route path='/customer/logout' element={<CustomerLogout/>}/>
             <Route path='/customer/dashboard' element={<Dashboard/>}/>
             <Route path='/customer/addresses' element={<AddressList/>}/>
             <Route path='/customer/add-address' element={<AddAddress/>}/>
@@ -92,8 +102,9 @@ function App() {
             <Route path='/customer/profile' element={<Profile/>}/>
             <Route path='/customer/change-password' element={<ChangePassword/>}/>
             <Route path='/customer/add-review/:product_id' element={<AddReview/>}/>
-
-
+            <Route path='/customer/orders' element={<Orders/>}/>
+            <Route path='/order/success' element={<OrderSuccess/>}/>
+            
           </Routes>
         
         }
@@ -101,35 +112,5 @@ function App() {
    </div>
   );
 }
-      /*{ Rating and Reviews }
-    <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
-  <ol class="carousel-indicators">
-    <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-    <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-    <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-  </ol>
-  <div class="carousel-inner">
-    <div class="carousel-item active">
-      <img class="d-block w-100" src="..." alt="First slide">
-    </div>
-    <div class="carousel-item">
-      <img class="d-block w-100" src="..." alt="Second slide">
-    </div>
-    <div class="carousel-item">
-      <img class="d-block w-100" src="..." alt="Third slide">
-    </div>
-  </div>
-  <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
-    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-    <span class="sr-only">Previous</span>
-  </a>
-  <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
-    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-    <span class="sr-only">Next</span>
-  </a>
-</div>
-
-      {End} */
-  
 
 export default App;
