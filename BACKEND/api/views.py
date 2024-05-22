@@ -132,6 +132,17 @@ class PodcastList(generics.ListCreateAPIView):
     serializer_class=serializers.PodcastListSerializer
     pagination_class=pagination.PageNumberPagination
 
+    def get_queryset(self):
+        qs=super().get_queryset()
+        if 'category' in self.request.GET:
+            category=self.request.GET['category']
+            category=models.PodcastCategory.objects.get(id=category)
+            qs=qs.filter(category=category)
+        if 'fetch_limit' in self.request.GET:
+            limit=int(self.request.GET['fetch_limit'])
+            qs=qs[:limit]
+        return qs
+
 class PodcastDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset=models.Podcast.objects.all()
     serializer_class=serializers.PodcastDetailSerializer
