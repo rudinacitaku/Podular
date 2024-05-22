@@ -31,7 +31,7 @@ class PodcastListSerializer(serializers.ModelSerializer):
     podcast_imgs=PodcastImageSerializer(many=True, read_only=True)
     class Meta:
         model=models.Podcast
-        fields=['id','category','creator', 'title','detail','podcast_ratings','image']
+        fields=['id','category','creator', 'title','detail','podcast_ratings', 'podcast_imgs']
 
     def __init__ (self, *args, **kwargs):
         super(PodcastListSerializer, self).__init__(*args, **kwargs)

@@ -12,6 +12,7 @@ import Favorites from './components/Favorites';
 import Checkout from './components/Checkout';
 import OrderSuccess from './components/OrderSuccess';
 import OrderFailure from './components/OrderFailure';
+import AllProducts from './components/AllProducts';
 import Footer from './components/Footer';
 
 //Admin panel
@@ -70,6 +71,7 @@ function App() {
             <Route path='/checkout' element={<Checkout/>}/>
             <Route path='/order/success' element={<OrderSuccess/>}/>
             <Route path='/order/failure' element={<OrderFailure/>}/>
+            <Route path='/allproducts' element={<AllProducts/>}/>
             <Route path='/footer' element={<Footer/>}/>
 
             {/*Admin Routes*/}
