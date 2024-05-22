@@ -1,4 +1,6 @@
+import React from 'react';
 import logo from '../logo.svg';
+
 function CategoryPodcasts(){
     return (
         <div className='container mt-4'>
