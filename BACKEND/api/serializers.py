@@ -1,6 +1,9 @@
 from rest_framework import serializers
 from . import models
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
+from django.contrib.auth.models import User
+from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
+from rest_framework import serializers
 
 class CreatorSerializer(serializers.ModelSerializer):
     class Meta:
@@ -47,6 +50,12 @@ class PodcastDetailSerializer(serializers.ModelSerializer):
         super(PodcastListSerializer, self).__init__(*args, **kwargs)
         self.Meta.depth = 1
 
+#User
+class UserSerializer(serializers.ModelSerializer):
+    class Meta:
+        model=User
+        fields=['id','first_name','last_name','username','email']
+
 #Customer
 class CustomerSerializer(serializers.ModelSerializer):
     class Meta:
@@ -55,17 +64,28 @@ class CustomerSerializer(serializers.ModelSerializer):
 
     def __init__ (self, *args, **kwargs):
         super(CustomerSerializer, self).__init__(*args, **kwargs)
-        self.Meta.depth = 1
 
 class CustomerDetailSerializer(serializers.ModelSerializer):
     class Meta:
         model=models.Customer
-        fields=['id','user', 'mobile']
+        fields=['id','user', 'mobile','profile_img','customer_subscriptions']
 
-    def __init__ (self, *args, **kwargs):
-        super(CustomerDetailSerializer, self).__init__(*args, **kwargs)
+    # def to_representation(self, instance):
+    #     response=super().to_representation(instance)
+    #     response['user']=UserSerializer(instance.user).data
+    #     response['customer_subscriptions']=SubscriptionSerializer(instance.subscriptions).data
+    #     return response
+
+#Customer Address
+class CustomerAddressSerializer(serializers.ModelSerializer):
+    class Meta:
+        model=models.CustomerAddress
+        fields=['id', 'customer', 'address', 'default_address']
+    
+    def __init__(self, *args, **kwargs):
+        super(CustomerAddressSerializer, self).__init__(*args, **kwargs)
         self.Meta.depth = 1
- 
+    
 #Subscription
 class SubscriptionSerializer(serializers.ModelSerializer):
     class Meta:
@@ -85,19 +105,6 @@ class SubscriptionPodcastsSerializer(serializers.ModelSerializer):
         super(SubscriptionPodcastsSerializer, self).__init__(*args, **kwargs)
         self.Meta.depth = 1
 
-
-#Customer Address
-class CustomerAddressSerializer(serializers.ModelSerializer):
-    class Meta:
-        model=models.CustomerAddress
-        fields=['id', 'customer', 'address', 'default_address']
-    
-    def __init__(self, *args, **kwargs):
-        super(CustomerAddressSerializer, self).__init__(*args, **kwargs)
-        self.Meta.depth = 1
-
-from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
-from rest_framework import serializers
 
 class AdminTokenObtainPairSerializer(TokenObtainPairSerializer):
     @classmethod

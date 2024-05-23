@@ -9,12 +9,8 @@ from . import models
 from django.db import IntegrityError
 from django.contrib.auth.models import User 
 from django.contrib.auth import authenticate
-from django.http import JsonResponse
-from django.views.decorators.csrf import csrf_exempt
 from .models import Creator
-from django.http import JsonResponse
 from django.shortcuts import get_object_or_404
-
 
 #Creators
 class CreatorList(generics.ListCreateAPIView):
@@ -178,6 +174,10 @@ class CustomerDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset=models.Customer.objects.all()
     serializer_class=serializers.CustomerDetailSerializer
 
+class UserDetail(generics.RetrieveUpdateDestroyAPIView):
+    queryset=models.User.objects.all()
+    serializer_class=serializers.UserSerializer
+
 @csrf_exempt
 def customer_login(request):
     username=request.POST.get('username')
@@ -207,7 +207,6 @@ def customer_register(request):
         first_name=first_name, 
         last_name=last_name,
         email=email,
-        mobile=mobile,
         username=username,
         password=password,
     )

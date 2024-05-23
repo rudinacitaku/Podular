@@ -28,8 +28,9 @@ urlpatterns = [
     #Customers
     path('customers/', views.CustomerList.as_view()),
     path('customers/<int:pk>', views.CustomerDetail.as_view()),
-    path('customers/login/', views.customer_login,name='customer_login'),
-    path('customers/register/', views.customer_register,name='customer_register'),
+    path('user/<int:pk>', views.UserDetail.as_view()),
+    path('customer/login/', views.customer_login,name='customer_login'),
+    path('customer/register/', views.customer_register,name='customer_register'),
     path('customers/address-list/<int:pk>', views.CustomerAddressList.as_view()),
     path('mark-default-address/<int:pk>', views.mark_default_address,name='mark_default_address'),
     path('customer/dashboard/<int:pk>/', views.customer_dashboard, name='customer_dashboard'),
