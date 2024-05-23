@@ -234,7 +234,7 @@ function Home() {
       {/* Popular Sellers */}
       <main className='mt-4'>
         <div className='container'>
-          <h3 className='mb-4'>Popular Sellers <Link href='#' className='float-end btn btn-dark'>View All Sellers <i className="fas fa-arrow-right"></i></Link></h3>
+          <h3 className='mb-4'>Popular Sellers <Link to='/allcreators' className='float-end btn btn-dark'>View All Sellers <i className="fas fa-arrow-right"></i></Link></h3>
         </div>
       </main>
       
