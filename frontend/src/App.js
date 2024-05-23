@@ -13,8 +13,11 @@ import Checkout from './components/Checkout';
 import OrderSuccess from './components/OrderSuccess';
 import OrderFailure from './components/OrderFailure';
 import AllPodcasts from './components/AllPodcasts';
+import PodcastDetail from './components/PodcastDetail';
 import Footer from './components/Footer';
 import CategoryPodcasts from './components/CategoryPodcasts';
+import SingleCreator from './components/SingleCreator';
+import AllCreators from './components/AllCreators';
 
 //Admin panel
 import AdminLogin from './components/Admin/AdminLogin';
@@ -73,8 +76,12 @@ function App() {
             <Route path='/order/success' element={<OrderSuccess/>}/>
             <Route path='/order/failure' element={<OrderFailure/>}/>
             <Route path='/allpodcasts' element={<AllPodcasts/>}/>
+            <Route path='/podcastdetail' element={<PodcastDetail/>}/>
             <Route path='/footer' element={<Footer/>}/>
-            <Route path='/categorypage' element={<CategoryPodcasts/>}/>
+            <Route path='/category/:categoryId' element={<CategoryPodcasts/>}/>
+            <Route path='/podcast/:podcastId' element={<PodcastDetail/>}/>
+            <Route path='/singlecreator' element={<SingleCreator/>}/>
+            <Route path='/allcreators' element={<AllCreators/>}/>
 
             {/*Admin Routes*/}
             <Route path='/admin/AllSellers' element={<AllSellers/>}/>

@@ -4,20 +4,27 @@ from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from django.contrib.auth.models import User
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from rest_framework import serializers
+from django.contrib.auth.models import User
 
 class CreatorSerializer(serializers.ModelSerializer):
     class Meta:
         model=models.Creator
-        fields=['user', 'address']  #edhe 'id' ne vid?
+        fields=['user', 'address', 'id', 'profile_img']  #edhe 'id' ne vid?
 
     def __init__ (self, *args, **kwargs):
         super(CreatorSerializer, self).__init__(*args, **kwargs)
         self.Meta.depth = 1
 
+    # def to_representation(self, instance):
+    #     response=super().to_representation(instance)
+    #     response['user']=CreatorSerializer(instance.user).data
+    #     return response
+
+
 class CreatorDetailSerializer(serializers.ModelSerializer):
     class Meta:
         model=models.Creator
-        fields=['id','user', 'address']
+        fields=['id','user', 'address', 'profile_img']
 
     def __init__ (self, *args, **kwargs):
         super(CreatorDetailSerializer, self).__init__(*args, **kwargs)

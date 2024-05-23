@@ -3,6 +3,7 @@ import '@fortawesome/fontawesome-free/css/all.min.css';
 import { Link } from 'react-router-dom';
 import logo from './logo.svg';
 import SinglePodcast from './SinglePodcast';
+import AllPodcasts from './AllPodcasts';
 import { useState,useEffect } from 'react';
 
 function Home() {
@@ -24,7 +25,7 @@ function Home() {
    {/* Latest Podcasts */}
    <main className='mt-4'>
         <div className='container'>
-          <h3 className='mb-4'>Latest Podcasts <Link href='#' className='float-end btn btn-dark'>View All Podcasts <i className="fas fa-arrow-right"></i></Link></h3>
+          <h3 className='mb-4'>Latest Podcasts <Link to='/allpodcasts' className='float-end btn btn-dark'>View All Podcasts <i className="fas fa-arrow-right"></i></Link></h3>
           <div className='row mb-4'>
             {
               podcasts.map((podcast)=> <SinglePodcast podcast={podcast} />)
@@ -234,7 +235,7 @@ function Home() {
       {/* Popular Sellers */}
       <main className='mt-4'>
         <div className='container'>
-          <h3 className='mb-4'>Popular Sellers <Link href='#' className='float-end btn btn-dark'>View All Sellers <i className="fas fa-arrow-right"></i></Link></h3>
+          <h3 className='mb-4'>Popular Sellers <Link to='/allcreators' className='float-end btn btn-dark'>View All Sellers <i className="fas fa-arrow-right"></i></Link></h3>
         </div>
       </main>
       
