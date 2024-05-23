@@ -74,7 +74,7 @@ function App() {
             <Route path='/order/failure' element={<OrderFailure/>}/>
             <Route path='/allpodcasts' element={<AllPodcasts/>}/>
             <Route path='/footer' element={<Footer/>}/>
-            <Route path='/categorypage' element={<CategoryPodcasts/>}/>
+            <Route path='/category/:categoryId' element={<CategoryPodcasts/>}/>
 
             {/*Admin Routes*/}
             <Route path='/admin/AllSellers' element={<AllSellers/>}/>
