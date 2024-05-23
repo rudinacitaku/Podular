@@ -1,4 +1,4 @@
-import logo from '/logo.svg';
+import logo from './logo.svg'
 import { Link } from 'react-router-dom';
 import {useState,useEffect} from 'react';
 import { useParams } from "react-router-dom";
@@ -10,7 +10,7 @@ function PodcastDetail(){
     const {podcast_slug,podcast_id} = useParams();
 
     useEffect(() => {
-        fetchData(baseUrl+'/podcast/'+podcast_id_id);
+        fetchData(baseUrl+'/podcast/'+ podcast_id);
     },[]);
 
     function fetchData(baseurl){
@@ -60,9 +60,25 @@ function PodcastDetail(){
                 </div>
                 </div>
                 <div className="col-8">
-                    <h3>{podcastData.title}</h3>
-                    <p>{podcastData.detail}</p>
-                    <h5 className="card-title">Price: $ {podcastData.price}</h5>
+                    <h3>Podcast Title {podcastData.title}</h3>
+                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.{podcastData.detail}</p>
+                    <h5 className="card-title">Price: 100 $ {podcastData.price}</h5>
+                    <p className='mt-3'>
+                        <button title="Add to Cart" className='btn btn-primary'>Add to Cart <i
+                        className="fa-solid fa-cart-plus"></i></button>
+                        <button title="Buy Now" className='btn btn-success ms-1'>Buy Now <i
+                        className="fa-solid fa-bag-shopping"></i></button>
+                        <button title="Add to Wishlist" className='btn btn-danger ms-1'>Wishlist <i
+                        className="fa fa-heart"></i></button>
+                    </p>
+                    <div className='podcasttags mt-4'>
+                        <h5>Tags</h5>
+                        <p>
+                            <Link to="#" className='badge bg-secondary text-white me-1'>Python</Link>
+                            <Link to="#" className='badge bg-secondary text-white me-1'>Django</Link>
+                            <Link to="#" className='badge bg-secondary text-white me-1'>Web Scripts</Link>
+                        </p>
+                    </div>
                 </div>
             </div>
         </section>
