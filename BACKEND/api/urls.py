@@ -16,6 +16,7 @@ urlpatterns = [
     path('creators/<int:pk>', views.CreatorDetails.as_view()),
     path('creators/register', creator_register, name='creator_register'),
     path('creators/login', views.creator_login, name='creator_login'),
+
     #Podcast Categories 
     path('categories/', views.CategoryList.as_view()),
     path('category/<int:pk>', views.CategoryDetail.as_view()),

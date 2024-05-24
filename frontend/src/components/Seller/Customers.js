@@ -1,6 +1,25 @@
 import SellerSidebar from "./SellerSidebar";
+import { useState, useEffect } from "react";
+const baseUrl='http//127.0.0.1/api/';
 
-function Customers() {
+function Customers(){
+  const vendor_id=localStorage.getItem('creator_id');
+  const [CustomerList,setCustomerList]=useState([]);
+
+  useEffect(() => {
+    fetchData(baseUrl+'creators/'+vendor_id+'/customers/');
+
+  },[]);
+
+  function fetchData(baseUrl){
+    fetch(baseUrl)
+    .then((response) => response.json())
+    .then((data) => {
+      setCustomerList(data.results);
+    });
+  };
+
+  console.log(CustomerList);
   return (
     <div className="container mt-4">
       <div className="row">
@@ -17,27 +36,19 @@ function Customers() {
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <td>1</td>
-                  <td>T Shirt</td>
-                  <td>$$$</td>
-                  <td>Available</td>
+                {
+                  CustomerList.map((item,index)=><tr>
+                  <td>{index+1}</td>
+                  <td>{item.customer.username}</td>
+                  <td>{item.customer.email}</td>
+                  <td>{item.customer.mobile}</td>
                   <td>
                     <button className="btn btn-primary btn-sm">Orders</button>
                     <button className="btn btn-danger btn-sm ms-1">Remove from List</button>
                     
                   </td>
-                </tr>
-                <tr>
-                  <td>2</td>
-                  <td>Totebag</td>
-                  <td>$$$</td>
-                  <td>Available</td>
-                  <td>
-                    <button className="btn btn-primary btn-sm">Orders</button>
-                    <button className="btn btn-danger btn-sm ms-1">Remove from List</button>
-                  </td>
-                </tr>
+                </tr>)
+                }
               </tbody>
             </table>
           </div>

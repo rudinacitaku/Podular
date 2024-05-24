@@ -38,6 +38,7 @@ import SellerOrders from './components/Seller/SellerOrders';
 import Customers from './components/Seller/Customers';
 import Reports from './components/Seller/Reports';
 import SellerProfile from './components/Seller/SellerProfile';
+import SellerDetail from './components/Seller/SellerDetail';
 
 
 //Customer panel
@@ -93,6 +94,7 @@ function App() {
 
             {/*Seller Routes*/}
             <Route path="/seller/register" element={<SellerRegister/>} />
+            <Route path="/creator/:creator_id" element={<SellerDetail/>}/>
             <Route path="/seller/login" element={<SellerLogin/>} />
             <Route path="/seller/logout" element={<SellerLogout/>}/>
             <Route path="/seller/dashboard" element={<SellerDashboard/>} />

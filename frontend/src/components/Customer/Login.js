@@ -1,50 +1,56 @@
-import axios from "axios";
-import { useState } from "react";
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 function Login(props) {
-    const baseUrl = 'http://127.0.0.1:8000/api/';
-    const [formError, setFormError] = useState(false);
-    const [errorMsg, setErrorMsg] = useState('');
+     // Ensure this URL is correctly configured as per your server settings
+  const baseUrl = 'http://127.0.0.1:8000/api/';  // Include the trailing slash here
+  const navigate = useNavigate();
+  const [loginFormData, setLoginFormData] = useState({
+    username: '',
+    password: ''
+  });
+  const [errorMsg, setErrorMsg] = useState('');
 
-    const [loginFormData, setLoginFormData] = useState({
-        "username": '',
-        "password": ''
-    });
-
-    const inputHandler = (event) => {
-        setLoginFormData({
-            ...loginFormData,
-            [event.target.name]: event.target.value
-        });
-    };
-
-    const submitHandler = (event) => {
-        // Send data as JSON payload
-        axios.post(baseUrl + 'customer/login/', loginFormData)
-            .then(function (response) {
-                if (response.data.bool === false) {
-                    setFormError(true);
-                    setErrorMsg(response.data.msg);
-                } else {
-                    localStorage.setItem('customer_login', true);
-                    localStorage.setItem('customer_username', response.data.user);
-                    setFormError(false);
-                    setErrorMsg('');
-                    window.location.href = '/customer/dashboard'; // Navigate to dashboard on successful login
-                }
-            })
-            .catch(function (error) {
-                console.log(error);
-            });
-    };
-
-    const checkCustomer = localStorage.getItem('customer_login');
-    if (checkCustomer) {
-        window.location.href = '/customer/dashboard';
+  // Check if user is already logged in and redirect
+  useEffect(() => {
+    if (localStorage.getItem('customer_login')) {
+      navigate('/customer/dashboard');
     }
+  }, [navigate]);
 
-    const buttonEnable = (loginFormData.username !== '') && (loginFormData.password !== '');
+  const inputHandler = (event) => {
+    setLoginFormData(prevState => ({
+      ...prevState,
+      [event.target.name]: event.target.value
+    }));
+  };
 
+  const submitHandler = (event) => {
+    event.preventDefault();
+    const formData = new FormData();
+    formData.append('username', loginFormData.username);
+    formData.append('password', loginFormData.password);
+
+    // Corrected the API endpoint concatenation here
+    axios.post(baseUrl + 'customer/login/', formData)
+      .then(response => {
+        const data = response.data;
+        if (data.bool) {
+          // Assuming your response has these keys and bool represents success
+          localStorage.setItem('customer_login', true);
+          localStorage.setItem('customer_username', data.user);
+          localStorage.setItem('customer_id', data.id);
+          navigate('/customer/dashboard');
+        } else {
+          setErrorMsg(data.msg);
+        }
+      })
+      .catch(error => {
+        console.log(error);
+        setErrorMsg('Login failed. Please try again.');
+      });
+  };
     return (
         <div className='container mt-4'>
             <div className='row'>
@@ -52,20 +58,19 @@ function Login(props) {
                     <div className='card'>
                         <h4 className='card-header'>Login</h4>
                         <div className='card-body'>
-                            {formError &&
-                                <p className="text-danger">{errorMsg}</p>
-                            }
-                            <form>
-                                <div className="mb-3 text-start">
-                                    <label htmlFor="username" className="form-label">Username</label>
-                                    <input type="text" name="username" value={loginFormData.username} onChange={inputHandler} className="form-control" id="username" />
-                                </div>
-                                <div className="mb-3 text-start">
-                                    <label htmlFor="pwd" className="form-label">Password</label>
-                                    <input type="password" name="password" value={loginFormData.password} onChange={inputHandler} className="form-control" id="pwd" />
-                                </div>
-                                <button type="button" disabled={!buttonEnable} onClick={submitHandler} className="btn btn-primary">Submit</button>
-                            </form>
+                        <form onSubmit={submitHandler}>
+                <div className="mb-3">
+                  <label htmlFor="username" className="form-label">Username</label>
+                  <input type="text" className="form-control" id="username" name="username" autoComplete="username" value={loginFormData.username} onChange={inputHandler} />
+                </div>
+                <div className="mb-3">
+                  <label htmlFor="password" className="form-label">Password</label>
+                  <input type="password" className="form-control" id="password" name="password" autoComplete="current-password" value={loginFormData.password} onChange={inputHandler} />
+                </div>
+                <button type="submit" className="btn btn-primary btn-block">Login</button>
+                {errorMsg && <p className="text-danger mt-2">{errorMsg}</p>}
+              </form>
+
                         </div>
                     </div>
                 </div>
