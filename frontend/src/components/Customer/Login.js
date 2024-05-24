@@ -33,14 +33,14 @@ function Login(props) {
     formData.append('password', loginFormData.password);
 
     // Corrected the API endpoint concatenation here
-    axios.post(baseUrl + 'customer/login', formData)
+    axios.post(baseUrl + 'customer/login/', formData)
       .then(response => {
         const data = response.data;
         if (data.bool) {
           // Assuming your response has these keys and bool represents success
-          localStorage.setItem('customer_id', data.id);
           localStorage.setItem('customer_login', true);
           localStorage.setItem('customer_username', data.user);
+          localStorage.setItem('customer_id', data.id);
           navigate('/customer/dashboard');
         } else {
           setErrorMsg(data.msg);

@@ -221,36 +221,43 @@ def customer_login(request):
 
 @csrf_exempt
 def customer_register(request):
-    first_name=request.POST.get('first_name')
-    last_name=request.POST.get('last_name')
-    email=request.POST.get('email')
-    mobile=request.POST.get('mobile')
-    username=request.POST.get('username')
-    password=request.POST.get('password')
-    user=User.objects.create(
-        first_name=first_name, 
-        last_name=last_name,
-        email=email,
+    first_name = request.POST.get('first_name')
+    last_name = request.POST.get('last_name')
+    email = request.POST.get('email')
+    mobile = request.POST.get('mobile')
+    username = request.POST.get('username')
+    password = request.POST.get('password')
+
+    if not username:
+        return JsonResponse({'bool': False, 'msg': 'Username must be provided'}, status=400)
+
+    # Create user with hashed password
+    user = User.objects.create_user(
         username=username,
-        password=password,
+        email=email,
+        password=password,  # Use create_user to hash the password
+        first_name=first_name,
+        last_name=last_name,
     )
+
     if user:
-        customer=models.Customer.objects.create(
+        customer = models.Customer.objects.create(
             user=user,
             mobile=mobile
         )
-        msg={
-            'bool':True,
-            'user':user.id,
-            'customer':customer.id,
+        msg = {
+            'bool': True,
+            'user_id': user.id,
+            'customer_id': customer.id,
             'msg': 'Thank you for your registration! You can login now.'
         }
     else:
-            msg={
-                'bool':False,
-                'msg':'Invalid data!',
-            }
+        msg = {
+            'bool': False,
+            'msg': 'Invalid data!',
+        }
     return JsonResponse(msg)
+
 
 class CustomerAddressViewSet(viewsets.ModelViewSet):
     serializer_class=serializers.CustomerAddressSerializer
