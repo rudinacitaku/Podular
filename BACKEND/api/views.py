@@ -11,6 +11,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth import authenticate
 from .models import Creator
 from django.shortcuts import get_object_or_404
+import logging
 
 #Creators
 class CreatorList(generics.ListCreateAPIView):
@@ -29,8 +30,6 @@ def creator_detail(request, id):
         'address': creator.address
         # add other fields as needed
     })
-
-
 
 @csrf_exempt
 def creator_register(request):
@@ -178,22 +177,47 @@ class UserDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset=models.User.objects.all()
     serializer_class=serializers.UserSerializer
 
+logger = logging.getLogger(__name__)
+
 @csrf_exempt
 def customer_login(request):
-    username=request.POST.get('username')
-    password=request.POST.get('password')
-    user=authenticate(username=username,password=password)
-    if user:
-        msg={
-            'bool':True,
-            'user':user.username
-        }
-    else:
-            msg={
-                'bool':False,
-                'msg':'Invalid Username/Password!'
+    if request.method == 'POST':
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+        logger.debug(f"Received username: {username}, password: {password}")
+
+        user = authenticate(username=username, password=password)
+        if user:
+            try:
+                customer = models.Customer.objects.get(user=user)
+                msg = {
+                    'bool': True,
+                    'user': user.username,
+                    'id': customer.id
+                }
+                logger.debug(f"Authentication successful: {msg}")
+                return JsonResponse(msg)  # Ensure response is returned here
+            except models.Customer.DoesNotExist:
+                logger.error("No customer associated with this user")
+                # Handle case where user is authenticated but no customer is associated
+                return JsonResponse({
+                    'bool': False,
+                    'msg': 'No customer associated with this user'
+                }, status=404)
+        else:
+            logger.debug("Authentication failed")
+            msg = {
+                'bool': False,
+                'msg': 'Invalid username or password'
             }
-    return JsonResponse(msg)
+            return JsonResponse(msg, status=401)  # Use appropriate status for unauthorized access
+    else:
+        # Handle incorrect request method
+        logger.error("Invalid request method")
+        return JsonResponse({
+            'msg': 'Invalid request method'
+        }, status=405)
+
 
 @csrf_exempt
 def customer_register(request):
