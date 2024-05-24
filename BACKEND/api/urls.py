@@ -34,6 +34,7 @@ urlpatterns = [
     path('customers/address-list/<int:pk>', views.CustomerAddressList.as_view()),
     path('mark-default-address/<int:pk>', views.mark_default_address,name='mark_default_address'),
     path('customer/dashboard/<int:pk>/', views.customer_dashboard, name='customer_dashboard'),
+
     #Subscriptions
     path('subscriptions/', views.SubscriptionPodcastsList.as_view()),
     path('subscriptions/<int:pk>', views.SubscriptionPodcastsList.as_view()),

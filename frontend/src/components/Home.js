@@ -4,15 +4,20 @@ import { Link } from 'react-router-dom';
 import logo from './logo.svg';
 import SinglePodcast from './SinglePodcast';
 import AllPodcasts from './AllPodcasts';
+import Testimonial from './Testimonial';
 import { useState,useEffect } from 'react';
 
 function Home() {
   const baseUrl='http://127.0.0.1:8000/api';
   const [podcasts,setPodcasts]=useState([]);
+  const [ReviewList,setReviewList]=useState([]);
+
 
     useEffect(()=> {
       fetchData(baseUrl+'/podcasts/?fetch_limit=4');
-  },[]);
+      fetchTestimonialData(baseUrl+'/podcastrating');
+    },[]);
+
   function fetchData(baseUrl){
     fetch(baseUrl)
     .then((response) => response.json())
@@ -20,6 +25,14 @@ function Home() {
       setPodcasts(data.results);
     });
   }
+
+  function fetchTestimonialData(baseurl){
+    fetch(baseurl)
+    .then((response) => response.json())
+    .then((data) => {
+        setReviewList(data.results);
+    });
+}
   return (
     <>
    {/* Latest Podcasts */}
@@ -296,66 +309,38 @@ function Home() {
       {/* Rating and Reviews start */ }
       <div id="carouselExampleIndicators" className="carousel slide my-4 border bg-dark text-white p-5" data-bs-ride="true">
         <div className="carousel-indicators">
-          <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" className="active" aria-current="true" aria-label="Slide 1"></button>
-          <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
-          <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+          {
+            ReviewList.map((item,index)=> 
+            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" className="active"
+            aria-current="true" aria-label="Slide 1"></button>)
+          }
         </div>
         <div className="carousel-inner">
-          <div className="carousel-item active">
-            <figure className="text-center">
-              <blockquote className="blockquote">
-                <p>A review of a podcast</p>
-              </blockquote>
-              <figcaption className="blockquote-footer">
-                <i className="fa fa-star text-warning"></i>
-                <i className="fa fa-star text-warning"></i>
-                <i className="fa fa-star text-warning"></i>
-                <i className="fa fa-star text-warning"></i>
-                <i className="fa fa-star text-warning"></i>
-                <cite title="Source Title">Customer 1</cite>
-              </figcaption>
-            </figure>
-          </div>
-          <div className="carousel-item">
-          <figure className="text-center">
-              <blockquote className="blockquote">
-                <p>Second review of a podcast</p>
-              </blockquote>
-              <figcaption className="blockquote-footer">
-                <i className="fa fa-star text-warning"></i>
-                <i className="fa fa-star text-warning"></i>
-                <i className="fa fa-star text-warning"></i>
-                <i className="fa fa-star text-warning"></i>
-                <i className="fa fa-star "></i>
-                <cite title="Source Title">Customer 2</cite>
-              </figcaption>
-            </figure>
-          </div>
-          <div className="carousel-item">
-          <figure className="text-center">
-              <blockquote className="blockquote">
-                <p>Third review of a podcast</p>
-              </blockquote>
-              <figcaption className="blockquote-footer">
-                <i className="fa fa-star text-warning"></i>
-                <i className="fa fa-star text-warning"></i>
-                <i className="fa fa-star text-warning"></i>
-                <i className="fa fa-star "></i>
-                <i className="fa fa-star "></i>
-                <cite title="Source Title">Customer 1</cite>
-              </figcaption>
-            </figure>
-          </div>
+
+            {
+              ReviewList.map((item,index)=> <Testimonial index={index} item={item} />)
+            }
+
+            {/*
+            <Testimonial index="0" />
+            <Testimonial index="1" />
+            <Testimonial index="2" />
+           */}
+            
         </div>
-        <Link className="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-bs-slide="prev">
-          <span className="carousel-control-prev-icon" aria-hidden="true"></span>
-          <span className="sr-only">Previous</span>
-        </Link>
-        <Link className="carousel-control-next" href="#carouselExampleIndicators" role="button" data-bs-slide="next">
-          <span className="carousel-control-next-icon" aria-hidden="true"></span>
-          <span className="sr-only">Next</span>
-        </Link>
+        
+        <button className="carousel-control-prev" type="button"
+        data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+        <span className="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span className="visually-hidden">Previous</span>
+        </button>
+        <button className="carousel-control-next" type="button"
+        data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+        <span className="carousel-control-next-icon" aria-hidden="true"></span>
+        <span className="visually-hidden">Next</span>
+        </button>
       </div>
+      
       {/* Rating and Reviews End */} 
       
     </>
