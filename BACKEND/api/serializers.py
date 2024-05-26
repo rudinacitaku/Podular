@@ -158,8 +158,13 @@ class CategoryDetailSerializer(serializers.ModelSerializer):
 class PodcastRatingSerializer(serializers.ModelSerializer):
     class Meta:
         model=models.PodcastRating
-        fields=['id', 'customer', 'podcast', 'rating','reviews','add_time']
+        fields=['id', 'customer', 'podcast', 'rating','reviews', 'add_time']
     
     def __init__(self, *args, **kwargs):
         super(PodcastRatingSerializer, self).__init__(*args, **kwargs)
         #self.Meta.depth = 1
+        
+    def to_representation(self, instance):
+        response=super().to_representation(instance)
+        response['customer']=CustomerSerializer(instance.user).data
+        return response

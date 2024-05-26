@@ -119,7 +119,7 @@ function App() {
             <Route path='/customer/wishlist' element={<Wishlist/>}/>
             <Route path='/customer/profile' element={<Profile/>}/>
             <Route path='/customer/change-password' element={<ChangePassword/>}/>
-            <Route path='/customer/add-review/:podcast_id' element={<AddReview/>}/>
+            <Route path='/customer/add-review/' element={<AddReview/>}/>
             <Route path='/customer/orders' element={<Orders/>}/>
             <Route path='/order/success' element={<OrderSuccess/>}/>
             
