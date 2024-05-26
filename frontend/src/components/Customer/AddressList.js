@@ -9,7 +9,8 @@ function AddressList(){
     const [AddressList, setAddressList]=useState([]);
 
     useEffect(() => {
-        fetchData(baseUrl+'/address');
+        fetchData(baseUrl+'/customers/'+customer_id+'/address-list');
+
     },[]);
     function fetchData(baseUrl){
         fetch(baseUrl)
@@ -22,6 +23,7 @@ function AddressList(){
     function DefaultAddressHandler(address_id){
         const formData=new FormData();;
         formData.append('address_id',address_id);
+        
 
         axios.post(baseUrl+'/mark-default-address/'+parseInt(address_id)+'/',formData)
         .then(function(response){
@@ -55,14 +57,13 @@ function AddressList(){
                                             <div className="card">
                                                 <div className="card-body text-muted">
                                                 <h6>
-                                                    {
-                                                    address.default_address==true && <span role="button"><i className="fa fa-check-circle text-success mb-2"/><br/></span>
-                                                    }
-                                                    {
-                                                    address.default_address && <span onClick={()=>DefaultAddressHandler(address.id)} role="button"><i className="far fa-check-circle text-secondary mb-2"/><br/></span>
-                                                    }
-                                                    <Link to={`/customer/update-address/${address.id}`}>{address.address}</Link>
-                                                    <Link to={`/customer/delete-address/${address.id}`}>{address.address}</Link>
+                                                   {
+                                                    address.default_address == true && <span><i className="fa fa-check-circle text-success mb-2"></i></span>
+                                                   }
+                                                   {
+                                                    !address.default_address && <span onClick={()=>DefaultAddressHandler(address.id)} role="button"><i className="fa-regular fa-check-circle text-secondary mb-2"></i></span>
+                                                   }
+                                                   <Link to={`/customer/update-address/${address.id}`}>{address.address}</Link>
                                                 </h6>
                                             </div>
                                         </div>

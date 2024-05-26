@@ -262,7 +262,7 @@ def customer_register(request):
 class CustomerAddressViewSet(viewsets.ModelViewSet):
     serializer_class=serializers.CustomerAddressSerializer
     queryset=models.CustomerAddress.objects.all()
-
+    
 class CustomerAddressList(generics.ListAPIView):
     queryset=models.CustomerAddress.objects.all()
     serializer_class=serializers.CustomerAddressSerializer
@@ -290,12 +290,12 @@ def mark_default_address(request,pk):
 
 def customer_dashboard(request,pk):
     customer_id=pk
-    totalOrders=models.Order.objects.filter(customer__id=customer_id).count()
-    totalWishlist=models.Wishlist.objects.filter(customer__id=customer_id).count()
+    # totalOrders=models.Order.objects.filter(customer__id=customer_id).count()
+    # totalWishlist=models.Wishlist.objects.filter(customer__id=customer_id).count()
     totalAddress=models.CustomerAddress.objects.filter(customer__id=customer_id).count()
     msg={
-        'totalOrders':totalOrders,
-        'totalWishlist':totalWishlist,
+        # 'totalOrders':totalOrders,
+        # 'totalWishlist':totalWishlist,
         'totalAddress':totalAddress,
     }
     return JsonResponse(msg)

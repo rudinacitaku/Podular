@@ -9,8 +9,8 @@ function Dashboard(props){
     var customer_id=localStorage.getItem('customer_id');
     const [CountList, setCountList]=useState({
         'totalAddress':0,
-        'totalWishlist':0,
-        'totalOrders':0
+        // 'totalWishlist':0,
+        // 'totalOrders':0
     });
     
     useEffect(() => {
@@ -22,8 +22,8 @@ function Dashboard(props){
         .then((data) => {
             setCountList({
                 'totalAddress':data.totalAddress,
-                'totalWishlist':data.totalWishlist,
-                'totalOrders':data.totalOrders
+                // 'totalWishlist':data.totalWishlist,
+                // 'totalOrders':data.totalOrders
             })
         });
     }
@@ -59,7 +59,8 @@ function Dashboard(props){
                             <div className="card"> 
                                 <div className="card-body text-center">
                                     <h4>My WishList</h4>
-                                    <h6><Link to="/customer/wishlist">{CountList.totalWishlist}</Link></h6>
+                                    <h6><Link to="/customer/wishlist">0</Link></h6>
+                                    {/* {CountList.totalWishlist} */}
                                 </div>
                             </div>
                         </div>
@@ -67,7 +68,8 @@ function Dashboard(props){
                             <div className="card"> 
                                 <div className="card-body text-center">
                                         <h4>My Total Orders</h4>
-                                        <h6><Link to="/customer/orders">{CountList.totalOrders}</Link></h6>
+                                        <h6><Link to="/customer/orders">0</Link></h6>
+                                        {/* {CountList.totalOrders} */}
                                 </div>
                             </div>
                         </div>    

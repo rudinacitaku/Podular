@@ -1,49 +1,54 @@
 import Sidebar from './Sidebar';
 import { useState } from "react";
 import axios from 'axios';
-const baseUrl='http://127.0.0.1:8000/api';
 
-function AddAddress(){
-    var customer_id=localStorage.getItem('customer_id');
-    const [ErrorMsg,setErrorMsg]=useState('');
-    const [SuccessMsg,setSuccessMsg]=useState('');
-    const [AddressFormData,setAddressFormData]=useState({
-        'address':'',
-        'customer':customer_id
+const baseUrl = 'http://127.0.0.1:8000/api/';
+
+function AddAddress() {
+    var customer_id = localStorage.getItem('customer_id');
+    const [formError, setFormError] = useState(false);
+    const [ErrorMsg, setErrorMsg] = useState('');
+    const [SuccessMsg, setSuccessMsg] = useState('');
+    const [AddressFormData, setAddressFormData] = useState({
+        'address': '',
+        'customer': customer_id
     });
-    const inputHandler = (event) =>{
+
+    const inputHandler = (event) => {
         setAddressFormData({
             ...AddressFormData,
-            [event.target.name]:event.target.value
+            [event.target.name]: event.target.value
         });
     };
-    const submitHandler = () =>{
-        const formData=new FormData();
+
+    const submitHandler = () => {
+        const formData = new FormData();
         formData.append('address',AddressFormData.address);
         formData.append('customer',AddressFormData.customer);
-
-        axios.post(baseUrl+'/address/',formData)
-        .then(function (response){
-            if(response.status!=201){
-                setErrorMsg('Data not saved');
-                setSuccessMsg('');
-            }else{
-                setErrorMsg('');
-                setSuccessMsg('Data saved');
-                setAddressFormData({
-                    'address':'',
-                });
-            }
-           
-        })
-        .catch(function (error) {
-            console.log(error);
-        });
-    };
-    const disableBtn=(AddressFormData.address=='');
     
-    console.log(AddressFormData);
-    return(
+        axios.post(baseUrl+'address/', formData)
+            .then(function (response) {
+                if (response.data.bool == false) {
+                    setFormError(true);
+                    setErrorMsg(response.data.msg);
+                } else {
+                    setAddressFormData({
+                        'address': '',
+                        'customer': customer_id
+                    });
+                    setFormError(false);
+                setSuccessMsg(response.data.msg);
+                }
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+    };
+    
+
+    const disableBtn = AddressFormData.address === '';
+
+    return (
         <div className="container mt-4">
             <div className="row">
                 <div className="col-md-3 col-12 mb-2">
@@ -65,6 +70,7 @@ function AddAddress(){
                 </div>
             </div>
         </div>
-    )
+    );
 }
+
 export default AddAddress;
