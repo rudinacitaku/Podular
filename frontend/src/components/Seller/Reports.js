@@ -7,7 +7,7 @@ function Reports(){
                 <div className="col-md-3 col-12 mb-2">
                     <SellerSidebar/>
                 </div>
-                <div className="col-md-3 col-12 mb-2">
+                <div className="col-md-9 col-12 mb-2">
                     <div className="row">
                         <div className="col-md-4 mb-2">
                             <div className="card">

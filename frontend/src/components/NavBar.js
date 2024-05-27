@@ -35,6 +35,26 @@ export default function NavBar(props) {
         setOpen(!open)
     }
 
+    const checkCreator = localStorage.getItem('creator_login');
+    const checkCustomer = localStorage.getItem('customer_login');
+    const checkAdmin = localStorage.getItem('admin_login');
+
+    // Function to check if any user is logged in
+    function checkLoggedIn() {
+        return checkCreator || checkCustomer || checkAdmin;
+    }
+    // Determine if any user is logged in
+    const isLoggedIn = checkLoggedIn();
+
+    let dashboardLink;
+        if (checkCreator) {
+            dashboardLink = "/creator/dashboard";
+        } else if (checkCustomer) {
+            dashboardLink = "/customer/dashboard";
+        } else if (checkAdmin) {
+            dashboardLink = "/admin/dashboard";
+        }
+
     const myDrawer = (
         <div>
             <Toolbar />
@@ -92,8 +112,7 @@ export default function NavBar(props) {
             </Box>
         </div>
     ) 
-    const checkCreator=localStorage.getItem('creator_login');
-
+   
   return (
     <Box sx={{ display: 'flex' }}>
       <CssBaseline />
@@ -108,32 +127,25 @@ export default function NavBar(props) {
                 Podular
             </Typography>
 
-            {/*<Button variant="contained" color="inherit" sx={{ ml: 'auto', backgroundColor: 'lightpink', textTransform: 'none' }}>Account</Button>*/}
             <div className="navbar-nav ms-auto">
             <ul className="navbar-nav">
-            <li className="nav-item dropdown">
-                <Dropdown>
-                    <Dropdown.Toggle as={Link} to="#" role="button">
-                        Creator/Seller Panel
-                    </Dropdown.Toggle>
-
-                    
-                        { checkCreator && <Dropdown.Menu>
-                            <Dropdown.Item as={Link} to="/seller/dashboard">Dashboard</Dropdown.Item>
-                            <Dropdown.Item as={Link} to="/seller/logout">Log Out</Dropdown.Item>
-                            </Dropdown.Menu>}
-                        <Dropdown.Divider />
-                        { !checkCreator && <Dropdown.Menu> <Dropdown.Item as={Link} to="/seller/register">Register</Dropdown.Item>
-                        <Dropdown.Item as={Link} to="/seller/login">Log In</Dropdown.Item>
-                    </Dropdown.Menu>}
-                </Dropdown>
-            </li>
-            <li className='nav-item'>
-                <Link className='nav-link' aria-current="page" to="/checkout">New Orders</Link>
-            </li>
-
+            {isLoggedIn ? (
+                <>
+                    <div className='column'>
+                        <Link to={dashboardLink} className='text-black mx-2 text-decoration-none'>Dashboard</Link>
+                        <Link to="/customer/logout" className='text-danger mx-2 text-decoration-none'>Log out</Link>
+                    </div>
+                </>
+            ) : (
+                <>
+                    <div className='column'>
+                        <Link to="/customer/register" className='text-black mx-2 text-decoration-none'>Register</Link>
+                        <Link to="/customer/login" className='text-black mx-2 text-decoration-none'>Log In</Link>
+                    </div>
+                </>
+            )}
             </ul>
-</div>
+        </div>
 
         </Toolbar>
       </AppBar>

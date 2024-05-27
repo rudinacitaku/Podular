@@ -7,7 +7,7 @@ const baseUrl='http://127.0.0.1:8000/api/';
 function SellerProducts(props) {
     const [PodcastData,setPodcastData]=useState([]);
     useEffect(() => {
-        fetchData(baseUrl+'products/');
+        fetchData(baseUrl+'podcasts/');
       }, []);
     
     
@@ -67,8 +67,8 @@ function SellerProducts(props) {
                                         <td>None</td>
                                         <td>
                                             <a href='#' className='btn btn-info'>View</a>
-                                            <Link href={'/seller/update-product/${podcast.id}'} className='btn btn-primary ms-1'>Edit</Link>
-                                            <Link href={'/seller/update-product/${podcast.id}'} onClick={()=>showConfirm(podcast.id)} className='btn btn-danger ms-1'>Delete</Link>
+                                            <Link to={'/seller/update-product/${podcast.id}'} className='btn btn-primary ms-1'>Edit</Link>
+                                            <Link to={'/seller/delete-product/${podcast.id}'} onClick={()=>showConfirm(podcast.id)} className='btn btn-danger ms-1'>Delete</Link>
                                         </td>
                                     </tr>)
                                 }

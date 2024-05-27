@@ -152,19 +152,19 @@ function AddProduct() {
                       </select>
                     </div>
                     <div className='mb-3'>
-                      <label for='title' className='form-label'>Title</label>
+                      <label htmlFor='title' className='form-label'>Title</label>
                       <input type='text' name="title" value={PodcastData.title} onChange={inputHandler} className='form-control' id='title' />
                     </div>
                     <div className='mb-3'>
-                      <label for='price' className='form-label'>Price</label>
+                      <label htmlFor='price' className='form-label'>Price</label>
                       <input type='number' name="price" value={PodcastData.price} onChange={inputHandler} className='form-control' id='price' />
                     </div>
                     <div className='mb-3'>
-                      <label for='description' className='form-label'>Description</label>
+                      <label htmlFor='description' className='form-label'>Description</label>
                       <textarea className='form-control' name="detail" value={PodcastData.detail} onChange={inputHandler} rows='8' id='description' />
                     </div>
                     <div className='mb-3'>
-                      <label for='productImg' className='form-label'>Podcast Image</label>
+                      <label htmlFor='productImg' className='form-label'>Podcast Image</label>
                       <input type='file' className='form-control' name="image" onChange={fileHandler} id='podcastImg' />
                     </div>
                     <button type="submit" onClick={submitHandler} className='btn btn-primary'>Submit</button>
