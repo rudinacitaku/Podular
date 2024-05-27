@@ -7,12 +7,12 @@ const baseUrl='http://127.0.0.1:8000/api';
 
 function UpdateAddress(){
     const {address_id} = useParams();
-    var customer_id=localStorage.getItem('customer_id');
+    const customer_id = localStorage.getItem('customer_id');
     const [ErrorMsg,setErrorMsg]=useState('');
     const [SuccessMsg,setSuccessMsg]=useState('');
     const [AddressFormData,setAddressFormData]=useState({
         'address':'',
-        'customer':customer_id
+        'customer':customer_id || ''
     });
 
     useEffect(() => {
@@ -24,9 +24,10 @@ function UpdateAddress(){
         .then((data) => {
             setAddressFormData({
                 'address':data.address,
-                'customer':data.customer_id
+                'customer':data.customer_id || customer_id 
             });
-        });
+        })
+        .catch((error) => console.log(error));
     }
 
     const inputHandler = (event) =>{

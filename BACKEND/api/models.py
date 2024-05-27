@@ -31,23 +31,23 @@ class Podcast (models.Model):
         def __str__ (self):
             return self.title
         
-#Customer
 class Customer(models.Model):
-        user=models.ForeignKey(User,on_delete=models.CASCADE)
-        mobile=models.PositiveBigIntegerField()
-        profile_img=models.ImageField(upload_to='customer_imgs/',null=True)
-
-        def __str__ (self):
-            return self.user.username
-        
-#Customer Address
-class CustomerAddress(models.Model):
-    customer=models.ForeignKey(Customer,on_delete=models.CASCADE,related_name='customer_addresses')
-    address=models.TextField()
-    default_address=models.BooleanField(default=False)
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    mobile = models.PositiveBigIntegerField()
+    profile_img = models.ImageField(upload_to='customer_imgs/', null=True, blank=True)
 
     def __str__(self):
-          return self.address
+        return self.user.username
+
+class CustomerAddress(models.Model):
+    customer = models.ForeignKey(Customer, on_delete=models.CASCADE, related_name='addresses')
+    address = models.TextField()
+    default_address = models.BooleanField(default=False)
+
+    def __str__(self):
+        return self.address
+
+
 
  # Podcast Rating and Reviews 
 class PodcastRating(models.Model):

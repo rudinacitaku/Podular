@@ -1,6 +1,7 @@
 import Sidebar from './Sidebar';
 import { useState } from "react";
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 const baseUrl = 'http://127.0.0.1:8000/api/';
 
@@ -20,12 +21,12 @@ function AddAddress() {
             [event.target.name]: event.target.value
         });
     };
-
+    const navigate = useNavigate();
     const submitHandler = () => {
         const formData = new FormData();
         formData.append('address',AddressFormData.address);
         formData.append('customer',AddressFormData.customer);
-    
+        
         axios.post(baseUrl+'address/', formData)
             .then(function (response) {
                 if (response.data.bool == false) {
@@ -37,7 +38,8 @@ function AddAddress() {
                         'customer': customer_id
                     });
                     setFormError(false);
-                setSuccessMsg(response.data.msg);
+                    setSuccessMsg(response.data.msg);
+                    navigate('/customer/addresses');
                 }
             })
             .catch(function (error) {

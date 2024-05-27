@@ -25,8 +25,7 @@ function DeleteAddress(){
             if(response.status === 204){
                 setSuccessMsg('Address deleted successfully');
                 setErrorMsg('');
-            
-                navigate('/address');
+                navigate('/customer/addresses');
             } else {
                 setSuccessMsg('');
                 setErrorMsg('Failed to delete address');

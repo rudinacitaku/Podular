@@ -53,21 +53,25 @@ function AddressList(){
                     <div className="row">
                         {
                             AddressList.map((address,index)=>{
-                                return <div className="col-4 mb-4">
+                                return (
+                                <div className="col-4 mb-4" key={address.id}>
                                             <div className="card">
                                                 <div className="card-body text-muted">
                                                 <h6>
                                                    {
-                                                    address.default_address == true && <span><i className="fa fa-check-circle text-success mb-2"></i></span>
+                                                    address.default_address == true && <span><i className="fa fa-check-circle text-success mb-3 mx-1"></i></span>
                                                    }
                                                    {
-                                                    !address.default_address && <span onClick={()=>DefaultAddressHandler(address.id)} role="button"><i className="fa-regular fa-check-circle text-secondary mb-2"></i></span>
+                                                    !address.default_address && <span onClick={()=>DefaultAddressHandler(address.id)} role="button"><i className="fa-regular fa-check-circle text-secondary mb-3 mx-1"></i></span>
                                                    }
-                                                   <Link to={`/customer/update-address/${address.id}`}>{address.address}</Link>
+                                                   <strong>{address.address}</strong>
                                                 </h6>
+                                                <button type="button" className="btn btn-success mx-2"><Link to={`/customer/update-address/${address.id}`} className="text-white"><small>Update</small></Link></button>
+                                                <button type="button" className="btn btn-danger mx-2"><Link to={`/customer/delete-address/${address.id}`} className="text-white"><small>Delete</small></Link></button>
                                             </div>
                                         </div>
                                     </div>
+                                )
                             })
                         }
                     </div>
