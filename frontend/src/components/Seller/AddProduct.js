@@ -4,14 +4,13 @@ import axios from 'axios';
 const baseUrl='http://127.0.0.1:8000/api/';
 
 function AddProduct() {
-  const vendor_id=localStorage.getItem('vendor_id');
+  const creator_id=localStorage.getItem('creator_id');
   const [ErrorMsg,setErrorMsg]=useState('');
   const [SuccessMsg,setSuccessMsg]=useState('');
-
-  const [PodcastCategoryData, setPodcastCategoryData]=useState([]);
+  const [CategoryData, setCategoryData]=useState([]);
   const [PodcastData, setPodcastData]=useState({
     'category':'',
-    'vendor':'',
+    'creator':'',
     'title':'',
     'detail':'',
     'price':'',
@@ -45,7 +44,7 @@ function AddProduct() {
 
   const submitHandler = () =>{
     const formData=new FormData();
-    formData.append('vendor',PodcastData.vendor);
+    formData.append('creator',PodcastData.creator);
     formData.append('category',PodcastData.category);
     formData.append('title',PodcastData.title);
     formData.append('detail',PodcastData.detail);
@@ -63,7 +62,7 @@ function AddProduct() {
       if(response.status == 201){
         setPodcastData({
           'category':'',
-          'vendor':'',
+          'creator':'',
           'title':'',
           'detail':'',
           'price':'',
@@ -102,7 +101,7 @@ function AddProduct() {
   useEffect(() => {
     setPodcastData({
       ...PodcastData,
-      'vendor':vendor_id
+      'creator':creator_id
     });
     fetchData(baseUrl+ 'categories/');
   }, []);
@@ -112,7 +111,7 @@ function AddProduct() {
     fetch(baseurl)
     .then((response) => response.json())
     .then((data) => {
-      setPodcastCategoryData(data.results);
+      setCategoryData(data.results);
     });
   }
 
@@ -135,9 +134,9 @@ function AddProduct() {
                   <label htmlFor='category' className='form-label'>Category</label>  
                   <select id='category' className='form-control' name='category' onChange={inputHandler}>
                     {
-                    PodcastCategoryData.map((item, index) => (
+                      CategoryData.map((item, index) => (
                       <option key={index} value={item.id}>{item.title}</option>  // Added key for React elements in lists
-                    ))
+                      ))
                     }
                         {/*
                         <option value='comedy'>Comedy</option>
